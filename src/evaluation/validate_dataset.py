@@ -25,6 +25,7 @@ def validate_prolog(prolog_code):
     result = subprocess.run(
         [
             "swipl",
+            "--on-error=status",
             "-q",
             "-s", temp_path,
             "-g", "halt"
@@ -36,7 +37,7 @@ def validate_prolog(prolog_code):
     Path(temp_path).unlink()
 
     return {
-        "valid": result.returncode == 0,
+        "syntax_valid": result.returncode == 0,
         "return_code": result.returncode,
         "stdout": result.stdout.strip(),
         "stderr": result.stderr.strip()
@@ -53,14 +54,14 @@ def main():
     for example in dataset:
         result = validate_prolog(example["prolog"])
 
-        if result["valid"]:
+        if result["syntax_valid"]:
             valid_count += 1
 
         print(f"ID: {example['id']}")
         print(f"Natural language: {example['natural_language']}")
         print(f"Prolog: {example['prolog']}")
         print(f"Category: {example['category']}")
-        print(f"Valid Prolog: {result['valid']}")
+        print(f"Syntax Valid: {result['syntax_valid']}")
 
         if result["stderr"]:
             print(f"Error: {result['stderr']}")

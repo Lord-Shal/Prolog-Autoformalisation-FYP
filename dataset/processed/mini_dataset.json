@@ -58,5 +58,11 @@
     "natural_language": "Chopper is not a dog.",
     "prolog": "not(dog(chopper)).",
     "category": "negation"
+  },
+  {
+  "id": "011",
+  "natural_language": "Bob is human.",
+  "prolog": "human(bob",
+  "category": "fact"
   }
 ]
