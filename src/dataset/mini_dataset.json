@@ -1,0 +1,62 @@
+[
+  {
+    "id": "001",
+    "natural_language": "Luna is a cat.",
+    "prolog": "cat(luna).",
+    "category": "fact"
+  },
+  {
+    "id": "002",
+    "natural_language": "Every cat is an animal.",
+    "prolog": "animal(X) :- cat(X).",
+    "category": "simple_rule"
+  },
+  {
+    "id": "003",
+    "natural_language": "Every furry animal is warm-blooded.",
+    "prolog": "warm_blooded(X) :- animal(X), furry(X).",
+    "category": "multi_condition_rule"
+  },
+  {
+    "id": "004",
+    "natural_language": "Alice likes Bob.",
+    "prolog": "likes(alice, bob).",
+    "category": "relation"
+  },
+  {
+    "id": "005",
+    "natural_language": "Every dog is a mammal.",
+    "prolog": "mammal(X) :- dog(X).",
+    "category": "simple_rule"
+  },
+  {
+    "id": "006",
+    "natural_language": "Zwei is a dog.",
+    "prolog": "dog(zwei).",
+    "category": "fact"
+  },
+  {
+    "id": "007",
+    "natural_language": "Every mammal is an animal.",
+    "prolog": "animal(X) :- mammal(X).",
+    "category": "reasoning_chain"
+  },
+  {
+    "id": "008",
+    "natural_language": "Bruce owns a car.",
+    "prolog": "owns(bruce, car).",
+    "category": "relation"
+  },
+  {
+    "id": "009",
+    "natural_language": "Every student who studies passes.",
+    "prolog": "passes(X) :- student(X), studies(X).",
+    "category": "multi_condition_rule"
+  },
+  {
+    "id": "010",
+    "natural_language": "Chopper is not a dog.",
+    "prolog": "not(dog(chopper)).",
+    "category": "negation"
+  }
+]
