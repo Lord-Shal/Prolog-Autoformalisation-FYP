@@ -1,0 +1,9 @@
+Dataset version: v1.0
+Frozen: 2026-08-15
+Random seed: 4242564
+Total examples: 2000
+Train: 1597
+Validation: 204
+Test: 199
+Split strategy: grouped by category and template_group
+Source: dataset/processed/validated.jsonl
