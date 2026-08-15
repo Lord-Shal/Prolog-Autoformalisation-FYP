@@ -1,0 +1,5 @@
+{"id": "L1_0001", "level": 1, "category": "fact", "natural_language": "Luna is a cat.", "prolog": "cat(luna).", "template_group": "animal_fact"}
+{"id": "L1_0002", "level": 1, "category": "fact", "natural_language": "Luke is human.", "prolog": "human(luke).", "template_group": "human_fact"}
+{"id": "L1_0003", "level": 1, "category": "fact", "natural_language": "Taylor is a student.", "prolog": "student(taylor).", "template_group": "student_fact"}
+{"id": "L2_0001", "level": 2, "category": "simple_rule", "natural_language": "Every cat is an animal.", "prolog": "animal(X) :- cat(X).", "template_group": "classification_rule"}
+{"id": "L2_0002", "level": 2, "category": "simple_rule", "natural_language": "If someone is a student, then they study.", "prolog": "studies(X) :- student(X).", "template_group": "simple_implication_rule"}

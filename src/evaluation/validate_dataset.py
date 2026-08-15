@@ -4,7 +4,8 @@ import tempfile
 from pathlib import Path
 
 
-DATASET_PATH = Path("dataset/processed/mini_dataset.json")
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DATASET_PATH = PROJECT_ROOT / "dataset" / "processed" / "mini_dataset.json"
 
 
 def load_dataset(path):
