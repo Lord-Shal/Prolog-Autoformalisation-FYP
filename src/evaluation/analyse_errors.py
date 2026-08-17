@@ -8,6 +8,9 @@ EVALUATED_PATH = Path(
 OUTPUT_PATH = Path(
     "results/finetuned/error_analysis.json"
 )
+REVIEW_PATH = Path(
+    "results/finetuned/error_review.jsonl"
+)
 
 def load_jsonl(path):
     examples = []
@@ -30,6 +33,43 @@ def main():
         if not example["evaluation"]["exact_match"]
     ]
 
+    with open(
+        REVIEW_PATH,
+        "w",
+        encoding="utf-8"
+    ) as file:
+        for example in non_exact:
+            review_item = {
+                "id": example["id"],
+                "category": example.get("category"),
+                "level": example.get("level"),
+                "template_group": example.get(
+                    "template_group"
+                ),
+                "natural_language": example[
+                    "natural_language"
+                ],
+                "reference_prolog": example[
+                    "reference_prolog"
+                ],
+                "generated_prolog": example[
+                    "generated_prolog"
+                ],
+
+                # Fill these in manually
+                "error_type": "",
+                "semantically_correct": None,
+                "notes": ""
+            }
+
+            file.write(
+                json.dumps(
+                    review_item,
+                    ensure_ascii=False
+                )
+                + "\n"
+            )
+    
     reasoning_failures = [
         example
         for example in examples
@@ -261,6 +301,10 @@ def main():
     print(
         f"Full error analysis saved to: "
         f"{OUTPUT_PATH}"
+    )
+    print(
+        f"Manual review file saved to: "
+        f"{REVIEW_PATH}"
     )
 
 if __name__ == "__main__":
