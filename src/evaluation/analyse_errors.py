@@ -56,8 +56,7 @@ def main():
                     "generated_prolog"
                 ],
 
-                # Fill these in manually
-                "error_type": "",
+                "error_types": [],
                 "semantically_correct": None,
                 "notes": ""
             }
