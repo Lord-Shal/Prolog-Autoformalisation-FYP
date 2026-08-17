@@ -24,6 +24,46 @@ def load_jsonl(path):
 
     return examples
 
+def analyse_manual_review(path):
+    reviews = load_jsonl(path)
+
+    error_counts = Counter()
+    semantically_correct = 0
+    semantically_incorrect = 0
+    unreviewed = 0
+
+    for review in reviews:
+        for error_type in review.get("error_types", []):
+            error_counts[error_type] += 1
+
+        semantic_result = review.get("semantically_correct")
+
+        if semantic_result is True:
+            semantically_correct += 1
+        elif semantic_result is False:
+            semantically_incorrect += 1
+        else:
+            unreviewed += 1
+
+    print()
+    print("===== MANUAL ERROR CLASSIFICATION =====")
+
+    for error_type, count in error_counts.most_common():
+        print(f"{error_type}: {count}")
+
+    print()
+    print("===== SEMANTIC REVIEW =====")
+    print(f"Semantically correct: {semantically_correct}")
+    print(f"Semantically incorrect: {semantically_incorrect}")
+    print(f"Unreviewed: {unreviewed}")
+
+    return {
+        "error_type_counts": dict(error_counts),
+        "semantically_correct": semantically_correct,
+        "semantically_incorrect": semantically_incorrect,
+        "unreviewed": unreviewed
+    }
+
 def main():
     examples = load_jsonl(EVALUATED_PATH)
 
@@ -33,41 +73,42 @@ def main():
         if not example["evaluation"]["exact_match"]
     ]
 
-    with open(
-        REVIEW_PATH,
-        "w",
-        encoding="utf-8"
-    ) as file:
-        for example in non_exact:
-            review_item = {
-                "id": example["id"],
-                "category": example.get("category"),
-                "level": example.get("level"),
-                "template_group": example.get(
-                    "template_group"
-                ),
-                "natural_language": example[
-                    "natural_language"
-                ],
-                "reference_prolog": example[
-                    "reference_prolog"
-                ],
-                "generated_prolog": example[
-                    "generated_prolog"
-                ],
+    if not REVIEW_PATH.exists():
+        with open(
+            REVIEW_PATH,
+            "w",
+            encoding="utf-8"
+        ) as file:
+            for example in non_exact:
+                review_item = {
+                    "id": example["id"],
+                    "category": example.get("category"),
+                    "level": example.get("level"),
+                    "template_group": example.get(
+                        "template_group"
+                    ),
+                    "natural_language": example[
+                        "natural_language"
+                    ],
+                    "reference_prolog": example[
+                        "reference_prolog"
+                    ],
+                    "generated_prolog": example[
+                        "generated_prolog"
+                    ],
 
-                "error_types": [],
-                "semantically_correct": None,
-                "notes": ""
-            }
+                    "error_types": [],
+                    "semantically_correct": None,
+                    "notes": ""
+                }
 
-            file.write(
-                json.dumps(
-                    review_item,
-                    ensure_ascii=False
+                file.write(
+                    json.dumps(
+                        review_item,
+                        ensure_ascii=False
+                    )
+                    + "\n"
                 )
-                + "\n"
-            )
     
     reasoning_failures = [
         example
@@ -295,6 +336,10 @@ def main():
             indent=4,
             ensure_ascii=False
         )
+
+    manual_review_results = analyse_manual_review(
+        REVIEW_PATH
+    )
 
     print()
     print(
