@@ -1,0 +1,117 @@
+{
+    "total_examples": 199,
+    "exact_match": {
+        "correct": 162,
+        "total": 199,
+        "percentage": 81.41
+    },
+    "syntax_valid": {
+        "correct": 199,
+        "total": 199,
+        "percentage": 100.0
+    },
+    "executable": {
+        "correct": 199,
+        "total": 199,
+        "percentage": 100.0
+    },
+    "reasoning_correct": {
+        "correct": 41,
+        "total": 41,
+        "percentage": 100.0
+    },
+    "by_category": {
+        "fact": {
+            "total_examples": 53,
+            "exact_match": {
+                "correct": 43,
+                "total": 53,
+                "percentage": 81.13
+            },
+            "syntax_valid": {
+                "correct": 53,
+                "total": 53,
+                "percentage": 100.0
+            },
+            "executable": {
+                "correct": 53,
+                "total": 53,
+                "percentage": 100.0
+            },
+            "reasoning_correct": {
+                "correct": 0,
+                "total": 0,
+                "percentage": null
+            }
+        },
+        "reasoning": {
+            "total_examples": 41,
+            "exact_match": {
+                "correct": 41,
+                "total": 41,
+                "percentage": 100.0
+            },
+            "syntax_valid": {
+                "correct": 41,
+                "total": 41,
+                "percentage": 100.0
+            },
+            "executable": {
+                "correct": 41,
+                "total": 41,
+                "percentage": 100.0
+            },
+            "reasoning_correct": {
+                "correct": 41,
+                "total": 41,
+                "percentage": 100.0
+            }
+        },
+        "multi_condition_rule": {
+            "total_examples": 45,
+            "exact_match": {
+                "correct": 23,
+                "total": 45,
+                "percentage": 51.11
+            },
+            "syntax_valid": {
+                "correct": 45,
+                "total": 45,
+                "percentage": 100.0
+            },
+            "executable": {
+                "correct": 45,
+                "total": 45,
+                "percentage": 100.0
+            },
+            "reasoning_correct": {
+                "correct": 0,
+                "total": 0,
+                "percentage": null
+            }
+        },
+        "simple_rule": {
+            "total_examples": 60,
+            "exact_match": {
+                "correct": 55,
+                "total": 60,
+                "percentage": 91.67
+            },
+            "syntax_valid": {
+                "correct": 60,
+                "total": 60,
+                "percentage": 100.0
+            },
+            "executable": {
+                "correct": 60,
+                "total": 60,
+                "percentage": 100.0
+            },
+            "reasoning_correct": {
+                "correct": 0,
+                "total": 0,
+                "percentage": null
+            }
+        }
+    }
+}

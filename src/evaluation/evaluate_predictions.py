@@ -1,12 +1,18 @@
+import sys
 import json
 import subprocess
 import tempfile
 from collections import defaultdict
 from pathlib import Path
 
-PREDICTIONS_PATH = Path("results/baseline/predictions.jsonl")
-EVALUATED_PATH = Path("results/baseline/evaluated.jsonl")
-METRICS_PATH = Path("results/baseline/metrics.json")
+def get_paths(run_name):
+    result_dir = Path("results") / run_name
+
+    return (
+        result_dir / "predictions.jsonl",
+        result_dir / "evaluated.jsonl",
+        result_dir / "metrics.json"
+    )
 
 def load_jsonl(path):
     examples = []
@@ -120,6 +126,11 @@ def run_reasoning_query(prolog_code, query):
     if not prolog_code.strip():
         return None, "Empty generation."
 
+    query = query.strip()
+
+    if query.endswith("."):
+        query = query[:-1].strip()
+
     temp_path = None
 
     try:
@@ -134,6 +145,7 @@ def run_reasoning_query(prolog_code, query):
             temp_path = Path(temp_file.name)
 
         goal = (
+            f"set_prolog_flag(unknown, fail),"
             f"catch("
             f"(({query}) -> "
             f"write('__QUERY_TRUE__') ; "
@@ -165,6 +177,9 @@ def run_reasoning_query(prolog_code, query):
 
         if "__QUERY_FALSE__" in stdout:
             return False, ""
+
+        if "__QUERY_ERROR__" in stdout:
+            return None, result.stderr.strip()
 
         return None, result.stderr.strip()
 
@@ -364,13 +379,32 @@ def save_jsonl(path, examples):
             )
 
 def main():
+    if len(sys.argv) != 2:
+        raise SystemExit(
+            "Usage: python src/evaluation/evaluate_predictions.py "
+            "<baseline|finetuned>"
+        )
+
+    run_name = sys.argv[1].lower()
+
+    if run_name not in {"baseline", "finetuned"}:
+        raise SystemExit(
+            "Run name must be either 'baseline' or 'finetuned'."
+        )
+
+    (
+        predictions_path,
+        evaluated_path,
+        metrics_path
+    ) = get_paths(run_name)
+
     print(
         f"Loading predictions from "
-        f"{PREDICTIONS_PATH}"
+        f"{predictions_path}"
     )
 
     predictions = load_jsonl(
-        PREDICTIONS_PATH
+        predictions_path
     )
 
     print(
@@ -397,7 +431,7 @@ def main():
         )
 
     save_jsonl(
-        EVALUATED_PATH,
+        evaluated_path,
         evaluated_examples
     )
 
@@ -411,13 +445,13 @@ def main():
         )
     )
 
-    METRICS_PATH.parent.mkdir(
+    metrics_path.parent.mkdir(
         parents=True,
         exist_ok=True
     )
 
     with open(
-        METRICS_PATH,
+        metrics_path,
         "w",
         encoding="utf-8"
     ) as file:
@@ -430,7 +464,9 @@ def main():
         )
 
     print()
-    print("===== BASELINE RESULTS =====")
+    print(
+        f"===== {run_name.upper()} RESULTS ====="
+    )
 
     print(
         f"Exact Match: "
@@ -462,11 +498,11 @@ def main():
 
     print()
     print(
-        f"Detailed results: {EVALUATED_PATH}"
+        f"Detailed results: {evaluated_path}"
     )
 
     print(
-        f"Aggregate metrics: {METRICS_PATH}"
+        f"Aggregate metrics: {metrics_path}"
     )
 
 if __name__ == "__main__":
