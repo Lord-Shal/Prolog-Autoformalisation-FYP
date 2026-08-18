@@ -6,10 +6,10 @@ from peft import PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 MODEL_NAME = "Qwen/Qwen2.5-1.5B-Instruct"
-ADAPTER_PATH = Path("models/qwen2.5-1.5b-prolog-lora")
+ADAPTER_PATH = Path("models/qwen2.5-1.5b-prolog-lora-v2")
 
 TEST_PATH = Path("dataset/splits/test.jsonl")
-OUTPUT_PATH = Path("results/finetuned/predictions.jsonl")
+OUTPUT_PATH = Path("results/finetuned_v2/predictions.jsonl")
 
 MAX_NEW_TOKENS = 256
 

@@ -382,14 +382,14 @@ def main():
     if len(sys.argv) != 2:
         raise SystemExit(
             "Usage: python src/evaluation/evaluate_predictions.py "
-            "<baseline|finetuned>"
+            "<baseline|finetuned|finetuned_v2>"
         )
 
     run_name = sys.argv[1].lower()
 
-    if run_name not in {"baseline", "finetuned"}:
+    if run_name not in {"baseline", "finetuned", "finetuned_v2"}:
         raise SystemExit(
-            "Run name must be either 'baseline' or 'finetuned'."
+            "Run name must be either 'baseline' or 'finetuned' or 'finetuned_v2'."
         )
 
     (
