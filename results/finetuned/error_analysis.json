@@ -369,5 +369,19 @@
             }
         ]
     },
-    "reasoning_failures": []
+    "reasoning_failures": [],
+    "manual_review": {
+        "error_type_counts": {
+            "incorrect_predicate": 36,
+            "incorrect_structure": 2,
+            "reversed_arguments": 9,
+            "extra_condition": 4,
+            "incorrect_negation": 4,
+            "incorrect_arity": 5,
+            "missing_condition": 2
+        },
+        "semantically_correct": 0,
+        "semantically_incorrect": 37,
+        "unreviewed": 0
+    }
 }

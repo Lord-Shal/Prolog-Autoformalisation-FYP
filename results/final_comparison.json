@@ -1,0 +1,446 @@
+{
+    "overall": {
+        "baseline": {
+            "total_examples": 199,
+            "exact_match": {
+                "correct": 1,
+                "total": 199,
+                "percentage": 0.5
+            },
+            "syntax_valid": {
+                "correct": 79,
+                "total": 199,
+                "percentage": 39.7
+            },
+            "executable": {
+                "correct": 79,
+                "total": 199,
+                "percentage": 39.7
+            },
+            "reasoning_correct": {
+                "correct": 10,
+                "total": 41,
+                "percentage": 24.39
+            },
+            "by_category": {
+                "fact": {
+                    "total_examples": 53,
+                    "exact_match": {
+                        "correct": 1,
+                        "total": 53,
+                        "percentage": 1.89
+                    },
+                    "syntax_valid": {
+                        "correct": 42,
+                        "total": 53,
+                        "percentage": 79.25
+                    },
+                    "executable": {
+                        "correct": 42,
+                        "total": 53,
+                        "percentage": 79.25
+                    },
+                    "reasoning_correct": {
+                        "correct": 0,
+                        "total": 0,
+                        "percentage": null
+                    }
+                },
+                "reasoning": {
+                    "total_examples": 41,
+                    "exact_match": {
+                        "correct": 0,
+                        "total": 41,
+                        "percentage": 0.0
+                    },
+                    "syntax_valid": {
+                        "correct": 17,
+                        "total": 41,
+                        "percentage": 41.46
+                    },
+                    "executable": {
+                        "correct": 17,
+                        "total": 41,
+                        "percentage": 41.46
+                    },
+                    "reasoning_correct": {
+                        "correct": 10,
+                        "total": 41,
+                        "percentage": 24.39
+                    }
+                },
+                "multi_condition_rule": {
+                    "total_examples": 45,
+                    "exact_match": {
+                        "correct": 0,
+                        "total": 45,
+                        "percentage": 0.0
+                    },
+                    "syntax_valid": {
+                        "correct": 5,
+                        "total": 45,
+                        "percentage": 11.11
+                    },
+                    "executable": {
+                        "correct": 5,
+                        "total": 45,
+                        "percentage": 11.11
+                    },
+                    "reasoning_correct": {
+                        "correct": 0,
+                        "total": 0,
+                        "percentage": null
+                    }
+                },
+                "simple_rule": {
+                    "total_examples": 60,
+                    "exact_match": {
+                        "correct": 0,
+                        "total": 60,
+                        "percentage": 0.0
+                    },
+                    "syntax_valid": {
+                        "correct": 15,
+                        "total": 60,
+                        "percentage": 25.0
+                    },
+                    "executable": {
+                        "correct": 15,
+                        "total": 60,
+                        "percentage": 25.0
+                    },
+                    "reasoning_correct": {
+                        "correct": 0,
+                        "total": 0,
+                        "percentage": null
+                    }
+                }
+            }
+        },
+        "finetuned_v1": {
+            "total_examples": 199,
+            "exact_match": {
+                "correct": 162,
+                "total": 199,
+                "percentage": 81.41
+            },
+            "syntax_valid": {
+                "correct": 199,
+                "total": 199,
+                "percentage": 100.0
+            },
+            "executable": {
+                "correct": 199,
+                "total": 199,
+                "percentage": 100.0
+            },
+            "reasoning_correct": {
+                "correct": 41,
+                "total": 41,
+                "percentage": 100.0
+            },
+            "by_category": {
+                "fact": {
+                    "total_examples": 53,
+                    "exact_match": {
+                        "correct": 43,
+                        "total": 53,
+                        "percentage": 81.13
+                    },
+                    "syntax_valid": {
+                        "correct": 53,
+                        "total": 53,
+                        "percentage": 100.0
+                    },
+                    "executable": {
+                        "correct": 53,
+                        "total": 53,
+                        "percentage": 100.0
+                    },
+                    "reasoning_correct": {
+                        "correct": 0,
+                        "total": 0,
+                        "percentage": null
+                    }
+                },
+                "reasoning": {
+                    "total_examples": 41,
+                    "exact_match": {
+                        "correct": 41,
+                        "total": 41,
+                        "percentage": 100.0
+                    },
+                    "syntax_valid": {
+                        "correct": 41,
+                        "total": 41,
+                        "percentage": 100.0
+                    },
+                    "executable": {
+                        "correct": 41,
+                        "total": 41,
+                        "percentage": 100.0
+                    },
+                    "reasoning_correct": {
+                        "correct": 41,
+                        "total": 41,
+                        "percentage": 100.0
+                    }
+                },
+                "multi_condition_rule": {
+                    "total_examples": 45,
+                    "exact_match": {
+                        "correct": 23,
+                        "total": 45,
+                        "percentage": 51.11
+                    },
+                    "syntax_valid": {
+                        "correct": 45,
+                        "total": 45,
+                        "percentage": 100.0
+                    },
+                    "executable": {
+                        "correct": 45,
+                        "total": 45,
+                        "percentage": 100.0
+                    },
+                    "reasoning_correct": {
+                        "correct": 0,
+                        "total": 0,
+                        "percentage": null
+                    }
+                },
+                "simple_rule": {
+                    "total_examples": 60,
+                    "exact_match": {
+                        "correct": 55,
+                        "total": 60,
+                        "percentage": 91.67
+                    },
+                    "syntax_valid": {
+                        "correct": 60,
+                        "total": 60,
+                        "percentage": 100.0
+                    },
+                    "executable": {
+                        "correct": 60,
+                        "total": 60,
+                        "percentage": 100.0
+                    },
+                    "reasoning_correct": {
+                        "correct": 0,
+                        "total": 0,
+                        "percentage": null
+                    }
+                }
+            }
+        },
+        "finetuned_v2": {
+            "total_examples": 199,
+            "exact_match": {
+                "correct": 175,
+                "total": 199,
+                "percentage": 87.94
+            },
+            "syntax_valid": {
+                "correct": 199,
+                "total": 199,
+                "percentage": 100.0
+            },
+            "executable": {
+                "correct": 199,
+                "total": 199,
+                "percentage": 100.0
+            },
+            "reasoning_correct": {
+                "correct": 41,
+                "total": 41,
+                "percentage": 100.0
+            },
+            "by_category": {
+                "fact": {
+                    "total_examples": 53,
+                    "exact_match": {
+                        "correct": 46,
+                        "total": 53,
+                        "percentage": 86.79
+                    },
+                    "syntax_valid": {
+                        "correct": 53,
+                        "total": 53,
+                        "percentage": 100.0
+                    },
+                    "executable": {
+                        "correct": 53,
+                        "total": 53,
+                        "percentage": 100.0
+                    },
+                    "reasoning_correct": {
+                        "correct": 0,
+                        "total": 0,
+                        "percentage": null
+                    }
+                },
+                "reasoning": {
+                    "total_examples": 41,
+                    "exact_match": {
+                        "correct": 41,
+                        "total": 41,
+                        "percentage": 100.0
+                    },
+                    "syntax_valid": {
+                        "correct": 41,
+                        "total": 41,
+                        "percentage": 100.0
+                    },
+                    "executable": {
+                        "correct": 41,
+                        "total": 41,
+                        "percentage": 100.0
+                    },
+                    "reasoning_correct": {
+                        "correct": 41,
+                        "total": 41,
+                        "percentage": 100.0
+                    }
+                },
+                "multi_condition_rule": {
+                    "total_examples": 45,
+                    "exact_match": {
+                        "correct": 28,
+                        "total": 45,
+                        "percentage": 62.22
+                    },
+                    "syntax_valid": {
+                        "correct": 45,
+                        "total": 45,
+                        "percentage": 100.0
+                    },
+                    "executable": {
+                        "correct": 45,
+                        "total": 45,
+                        "percentage": 100.0
+                    },
+                    "reasoning_correct": {
+                        "correct": 0,
+                        "total": 0,
+                        "percentage": null
+                    }
+                },
+                "simple_rule": {
+                    "total_examples": 60,
+                    "exact_match": {
+                        "correct": 60,
+                        "total": 60,
+                        "percentage": 100.0
+                    },
+                    "syntax_valid": {
+                        "correct": 60,
+                        "total": 60,
+                        "percentage": 100.0
+                    },
+                    "executable": {
+                        "correct": 60,
+                        "total": 60,
+                        "percentage": 100.0
+                    },
+                    "reasoning_correct": {
+                        "correct": 0,
+                        "total": 0,
+                        "percentage": null
+                    }
+                }
+            }
+        }
+    },
+    "exact_match_improvement": {
+        "baseline_to_v1_percentage_points": 80.91,
+        "v1_to_v2_percentage_points": 6.53,
+        "baseline_to_v2_percentage_points": 87.44
+    },
+    "v1_to_v2_failures": {
+        "v1_non_exact": 37,
+        "v2_non_exact": 24,
+        "failures_removed": 13,
+        "relative_failure_reduction_percentage": 35.14
+    },
+    "category_comparison": {
+        "v1": {
+            "fact": {
+                "total": 53,
+                "exact": 43,
+                "non_exact": 10,
+                "exact_match_percentage": 81.13
+            },
+            "multi_condition_rule": {
+                "total": 45,
+                "exact": 23,
+                "non_exact": 22,
+                "exact_match_percentage": 51.11
+            },
+            "reasoning": {
+                "total": 41,
+                "exact": 41,
+                "non_exact": 0,
+                "exact_match_percentage": 100.0
+            },
+            "simple_rule": {
+                "total": 60,
+                "exact": 55,
+                "non_exact": 5,
+                "exact_match_percentage": 91.67
+            }
+        },
+        "v2": {
+            "fact": {
+                "total": 53,
+                "exact": 46,
+                "non_exact": 7,
+                "exact_match_percentage": 86.79
+            },
+            "multi_condition_rule": {
+                "total": 45,
+                "exact": 28,
+                "non_exact": 17,
+                "exact_match_percentage": 62.22
+            },
+            "reasoning": {
+                "total": 41,
+                "exact": 41,
+                "non_exact": 0,
+                "exact_match_percentage": 100.0
+            },
+            "simple_rule": {
+                "total": 60,
+                "exact": 60,
+                "non_exact": 0,
+                "exact_match_percentage": 100.0
+            }
+        }
+    },
+    "error_comparison": {
+        "v1": {
+            "incorrect_predicate": 36,
+            "incorrect_structure": 2,
+            "reversed_arguments": 9,
+            "extra_condition": 4,
+            "incorrect_negation": 4,
+            "incorrect_arity": 5,
+            "missing_condition": 2
+        },
+        "v2": {
+            "incorrect_predicate": 24,
+            "reversed_arguments": 10,
+            "missing_condition": 2,
+            "incorrect_negation": 2,
+            "incorrect_arity": 3,
+            "incorrect_structure": 1
+        }
+    },
+    "v2_remaining_failure_groups": {
+        "binary_admires": 4,
+        "bird_not_flightless": 4,
+        "shared_child_inequality": 10,
+        "employee_not_busy": 3,
+        "binary_calls": 3
+    }
+}
