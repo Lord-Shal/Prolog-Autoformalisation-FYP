@@ -1,16 +1,16 @@
+import sys
 import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
-EVALUATED_PATH = Path(
-    "results/finetuned/evaluated.jsonl"
-)
-OUTPUT_PATH = Path(
-    "results/finetuned/error_analysis.json"
-)
-REVIEW_PATH = Path(
-    "results/finetuned/error_review.jsonl"
-)
+def get_paths(run_name):
+    result_dir = Path("results") / run_name
+
+    return (
+        result_dir / "evaluated.jsonl",
+        result_dir / "error_analysis.json",
+        result_dir / "error_review.jsonl"
+    )
 
 def load_jsonl(path):
     examples = []
@@ -65,7 +65,31 @@ def analyse_manual_review(path):
     }
 
 def main():
-    examples = load_jsonl(EVALUATED_PATH)
+    if len(sys.argv) != 2:
+        raise SystemExit(
+            "Usage: python src/evaluation/analyse_errors.py "
+            "<finetuned|finetuned_v2>"
+        )
+
+    run_name = sys.argv[1].lower()
+
+    if run_name not in {
+        "finetuned",
+        "finetuned_v2"
+    }:
+        raise SystemExit(
+            "Run name must be 'finetuned' or 'finetuned_v2'."
+        )
+
+    (
+        evaluated_path,
+        output_path,
+        review_path
+    ) = get_paths(run_name)
+
+    examples = load_jsonl(
+        evaluated_path
+    )
 
     non_exact = [
         example
@@ -73,9 +97,9 @@ def main():
         if not example["evaluation"]["exact_match"]
     ]
 
-    if not REVIEW_PATH.exists():
+    if not review_path.exists():
         with open(
-            REVIEW_PATH,
+            review_path,
             "w",
             encoding="utf-8"
         ) as file:
@@ -295,6 +319,10 @@ def main():
                 example.get("template_group")
         })
 
+    manual_review_results = analyse_manual_review(
+        review_path
+    )
+
     output = {
         "summary": {
             "total_examples": len(examples),
@@ -317,16 +345,19 @@ def main():
             dict(failures_by_category),
 
         "reasoning_failures":
-            reasoning_failure_details
+            reasoning_failure_details,
+
+        "manual_review":
+            manual_review_results
     }
 
-    OUTPUT_PATH.parent.mkdir(
+    output_path.parent.mkdir(
         parents=True,
         exist_ok=True
     )
 
     with open(
-        OUTPUT_PATH,
+        output_path,
         "w",
         encoding="utf-8"
     ) as file:
@@ -337,18 +368,14 @@ def main():
             ensure_ascii=False
         )
 
-    manual_review_results = analyse_manual_review(
-        REVIEW_PATH
-    )
-
     print()
     print(
         f"Full error analysis saved to: "
-        f"{OUTPUT_PATH}"
+        f"{output_path}"
     )
     print(
         f"Manual review file saved to: "
-        f"{REVIEW_PATH}"
+        f"{review_path}"
     )
 
 if __name__ == "__main__":

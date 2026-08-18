@@ -1,0 +1,266 @@
+{
+    "summary": {
+        "total_examples": 199,
+        "exact_matches": 175,
+        "non_exact_matches": 24,
+        "reasoning_failures": 0
+    },
+    "by_category": {
+        "fact": {
+            "total": 53,
+            "exact": 46,
+            "non_exact": 7,
+            "exact_match_percentage": 86.79
+        },
+        "multi_condition_rule": {
+            "total": 45,
+            "exact": 28,
+            "non_exact": 17,
+            "exact_match_percentage": 62.22
+        },
+        "reasoning": {
+            "total": 41,
+            "exact": 41,
+            "non_exact": 0,
+            "exact_match_percentage": 100.0
+        },
+        "simple_rule": {
+            "total": 60,
+            "exact": 60,
+            "non_exact": 0,
+            "exact_match_percentage": 100.0
+        }
+    },
+    "by_level": {
+        "1": {
+            "total": 53,
+            "exact": 46,
+            "non_exact": 7,
+            "exact_match_percentage": 86.79
+        },
+        "2": {
+            "total": 60,
+            "exact": 60,
+            "non_exact": 0,
+            "exact_match_percentage": 100.0
+        },
+        "3": {
+            "total": 45,
+            "exact": 28,
+            "non_exact": 17,
+            "exact_match_percentage": 62.22
+        },
+        "4": {
+            "total": 41,
+            "exact": 41,
+            "non_exact": 0,
+            "exact_match_percentage": 100.0
+        }
+    },
+    "template_group_failure_counts": {
+        "binary_admires": 4,
+        "bird_not_flightless": 4,
+        "shared_child_inequality": 10,
+        "employee_not_busy": 3,
+        "binary_calls": 3
+    },
+    "failures_by_category": {
+        "fact": [
+            {
+                "id": "fact_0452",
+                "natural_language": "Gary looks up to Sinbad.",
+                "reference_prolog": "admires(gary, sinbad).",
+                "generated_prolog": "respects(gary, sinbad).",
+                "template_group": "binary_admires",
+                "level": 1
+            },
+            {
+                "id": "fact_0493",
+                "natural_language": "Mary looks up to Petra.",
+                "reference_prolog": "admires(mary, petra).",
+                "generated_prolog": "respects(mary, petra).",
+                "template_group": "binary_admires",
+                "level": 1
+            },
+            {
+                "id": "fact_0441",
+                "natural_language": "Ray contacts Edward by phone.",
+                "reference_prolog": "calls(ray, edward).",
+                "generated_prolog": "contacts(ray, edward, phone).",
+                "template_group": "binary_calls",
+                "level": 1
+            },
+            {
+                "id": "fact_0492",
+                "natural_language": "Sinbad contacts Ash by phone.",
+                "reference_prolog": "calls(sinbad, ash).",
+                "generated_prolog": "contacts(sinbad, ash, phone).",
+                "template_group": "binary_calls",
+                "level": 1
+            },
+            {
+                "id": "fact_0405",
+                "natural_language": "Irina looks up to Tanya.",
+                "reference_prolog": "admires(irina, tanya).",
+                "generated_prolog": "respects(irina, tanya).",
+                "template_group": "binary_admires",
+                "level": 1
+            },
+            {
+                "id": "fact_0420",
+                "natural_language": "Wendy looks up to Brook.",
+                "reference_prolog": "admires(wendy, brook).",
+                "generated_prolog": "looks_up_to(wendy, brook).",
+                "template_group": "binary_admires",
+                "level": 1
+            },
+            {
+                "id": "fact_0472",
+                "natural_language": "Sinbad contacts Olivia by phone.",
+                "reference_prolog": "calls(sinbad, olivia).",
+                "generated_prolog": "contacts(sinbad, olivia, phone).",
+                "template_group": "binary_calls",
+                "level": 1
+            }
+        ],
+        "multi_condition_rule": [
+            {
+                "id": "multi_0477",
+                "natural_language": "Being a bird allows flight provided there is no evidence of being flightless.",
+                "reference_prolog": "can_fly(X) :- bird(X), \\+ flightless(X).",
+                "generated_prolog": "flight(X) :- bird(X), \\+ flightless(X).",
+                "template_group": "bird_not_flightless",
+                "level": 3
+            },
+            {
+                "id": "multi_0237",
+                "natural_language": "If an entity is a bird and is not provably flightless, it can fly.",
+                "reference_prolog": "can_fly(X) :- bird(X), \\+ flightless(X).",
+                "generated_prolog": "can_fly(X) :- bird(X), \\+ cannot_fly(X).",
+                "template_group": "bird_not_flightless",
+                "level": 3
+            },
+            {
+                "id": "multi_0115",
+                "natural_language": "If the same child Z has parents X and Y, and X differs from Y, then they are different parents.",
+                "reference_prolog": "different_parent(X, Y) :- parent(X, Z), parent(Y, Z), X \\= Y.",
+                "generated_prolog": "different_parents(X, Y) :- parent(Z, X), parent(Z, Y), X \\= Y.",
+                "template_group": "shared_child_inequality",
+                "level": 3
+            },
+            {
+                "id": "multi_0137",
+                "natural_language": "Two people are different parents whenever they have a child in common and are not the same person.",
+                "reference_prolog": "different_parent(X, Y) :- parent(X, Z), parent(Y, Z), X \\= Y.",
+                "generated_prolog": "different_parents(X, Y) :- parent(Z, X), parent(Z, Y), X \\= Y.",
+                "template_group": "shared_child_inequality",
+                "level": 3
+            },
+            {
+                "id": "multi_0431",
+                "natural_language": "Sharing a child makes X and Y different parents provided X is not equal to Y.",
+                "reference_prolog": "different_parent(X, Y) :- parent(X, Z), parent(Y, Z), X \\= Y.",
+                "generated_prolog": "different_parents(X, Y) :- parent(Z, X), parent(Z, Y), X \\= Y.",
+                "template_group": "shared_child_inequality",
+                "level": 3
+            },
+            {
+                "id": "multi_0148",
+                "natural_language": "A creature qualifies as able to fly when it is a bird and there is no evidence it is flightless.",
+                "reference_prolog": "can_fly(X) :- bird(X), \\+ flightless(X).",
+                "generated_prolog": "able_to_fly(X) :- bird(X), \\+ flightless(X).",
+                "template_group": "bird_not_flightless",
+                "level": 3
+            },
+            {
+                "id": "multi_0489",
+                "natural_language": "An employee is available if there is no evidence that they are busy.",
+                "reference_prolog": "available(X) :- employee(X), \\+ busy(X).",
+                "generated_prolog": "available(X) :- works_for(X), free(X).",
+                "template_group": "employee_not_busy",
+                "level": 3
+            },
+            {
+                "id": "multi_0327",
+                "natural_language": "If an employee is not provably busy, that employee is available.",
+                "reference_prolog": "available(X) :- employee(X), \\+ busy(X).",
+                "generated_prolog": "available(X) :- employee(X), free(X).",
+                "template_group": "employee_not_busy",
+                "level": 3
+            },
+            {
+                "id": "multi_0417",
+                "natural_language": "Employment together with the absence of evidence of being busy implies availability.",
+                "reference_prolog": "available(X) :- employee(X), \\+ busy(X).",
+                "generated_prolog": "availability(X) :- employment(X), \\+ busy(X).",
+                "template_group": "employee_not_busy",
+                "level": 3
+            },
+            {
+                "id": "multi_0398",
+                "natural_language": "If X and Y are both parents of Z and X is not Y, then they are different parents.",
+                "reference_prolog": "different_parent(X, Y) :- parent(X, Z), parent(Y, Z), X \\= Y.",
+                "generated_prolog": "different_parents(X, Y) :- parent(Z, X), parent(Z, Y), X \\= Y.",
+                "template_group": "shared_child_inequality",
+                "level": 3
+            },
+            {
+                "id": "multi_0140",
+                "natural_language": "X and Y are different parents if they both parent Z and are not the same person.",
+                "reference_prolog": "different_parent(X, Y) :- parent(X, Z), parent(Y, Z), X \\= Y.",
+                "generated_prolog": "different_parents(X, Y) :- parent(Z, X), parent(Z, Y), X \\= Y.",
+                "template_group": "shared_child_inequality",
+                "level": 3
+            },
+            {
+                "id": "multi_0308",
+                "natural_language": "X and Y qualify as different parents when both parent Z and they are distinct people.",
+                "reference_prolog": "different_parent(X, Y) :- parent(X, Z), parent(Y, Z), X \\= Y.",
+                "generated_prolog": "different_parents(X, Y) :- parent(Z, X), parent(Z, Y), X \\= Y.",
+                "template_group": "shared_child_inequality",
+                "level": 3
+            },
+            {
+                "id": "multi_0280",
+                "natural_language": "Two people count as different parents when they parent the same person and are distinct.",
+                "reference_prolog": "different_parent(X, Y) :- parent(X, Z), parent(Y, Z), X \\= Y.",
+                "generated_prolog": "different_parents(X, Y) :- parent(Z, X), parent(Z, Y), X \\= Y.",
+                "template_group": "shared_child_inequality",
+                "level": 3
+            },
+            {
+                "id": "multi_0111",
+                "natural_language": "When X and Y are parents of the same child and differ from one another, they are different parents.",
+                "reference_prolog": "different_parent(X, Y) :- parent(X, Z), parent(Y, Z), X \\= Y.",
+                "generated_prolog": "different_parents(X, Y) :- parent(Z, X), parent(Z, Y), X \\= Y.",
+                "template_group": "shared_child_inequality",
+                "level": 3
+            },
+            {
+                "id": "multi_0410",
+                "natural_language": "Any bird that is not flightless can fly.",
+                "reference_prolog": "can_fly(X) :- bird(X), \\+ flightless(X).",
+                "generated_prolog": "fly(X) :- bird(X), \\+ flightless(X).",
+                "template_group": "bird_not_flightless",
+                "level": 3
+            },
+            {
+                "id": "multi_0219",
+                "natural_language": "Two distinct people are different parents when they share a child.",
+                "reference_prolog": "different_parent(X, Y) :- parent(X, Z), parent(Y, Z), X \\= Y.",
+                "generated_prolog": "different_parents(X, Y) :- parent(Z, X), parent(Z, Y), X \\= Y.",
+                "template_group": "shared_child_inequality",
+                "level": 3
+            },
+            {
+                "id": "multi_0256",
+                "natural_language": "People who share a child but are not the same individual are different parents.",
+                "reference_prolog": "different_parent(X, Y) :- parent(X, Z), parent(Y, Z), X \\= Y.",
+                "generated_prolog": "parent(X, Y) :- parent(Z, X), parent(Z, Y).",
+                "template_group": "shared_child_inequality",
+                "level": 3
+            }
+        ]
+    },
+    "reasoning_failures": []
+}

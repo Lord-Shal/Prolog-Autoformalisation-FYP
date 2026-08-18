@@ -1,0 +1,24 @@
+{"id":"fact_0452","error_types":["incorrect_predicate"],"semantically_correct":false,"notes":"Generated respects/2 instead of the target predicate admires/2."}
+{"id":"multi_0477","error_types":["incorrect_predicate"],"semantically_correct":false,"notes":"Generated flight/1 instead of the target predicate can_fly/1."}
+{"id":"multi_0237","error_types":["incorrect_predicate"],"semantically_correct":false,"notes":"Used cannot_fly/1 under negation instead of the target predicate flightless/1."}
+{"id":"multi_0115","error_types":["incorrect_predicate","reversed_arguments"],"semantically_correct":false,"notes":"Generated different_parents/2 instead of different_parent/2 and reversed the arguments of parent/2."}
+{"id":"multi_0137","error_types":["incorrect_predicate","reversed_arguments"],"semantically_correct":false,"notes":"Generated different_parents/2 instead of different_parent/2 and reversed the arguments of parent/2."}
+{"id":"multi_0431","error_types":["incorrect_predicate","reversed_arguments"],"semantically_correct":false,"notes":"Generated different_parents/2 instead of different_parent/2 and reversed the arguments of parent/2."}
+{"id":"multi_0148","error_types":["incorrect_predicate"],"semantically_correct":false,"notes":"Generated able_to_fly/1 instead of the target predicate can_fly/1."}
+{"id":"fact_0493","error_types":["incorrect_predicate"],"semantically_correct":false,"notes":"Generated respects/2 instead of the target predicate admires/2."}
+{"id":"multi_0489","error_types":["incorrect_predicate","missing_condition","incorrect_negation"],"semantically_correct":false,"notes":"Replaced employee/1 with works_for/1 and replaced negation-as-failure of busy/1 with free/1."}
+{"id":"multi_0327","error_types":["incorrect_predicate","incorrect_negation"],"semantically_correct":false,"notes":"Replaced \\+ busy(X) with the invented positive predicate free(X)."}
+{"id":"multi_0417","error_types":["incorrect_predicate"],"semantically_correct":false,"notes":"Generated availability/1 and employment/1 instead of available/1 and employee/1."}
+{"id":"fact_0441","error_types":["incorrect_predicate","incorrect_arity"],"semantically_correct":false,"notes":"Generated contacts/3 instead of calls/2 and added phone as a third argument."}
+{"id":"multi_0398","error_types":["incorrect_predicate","reversed_arguments"],"semantically_correct":false,"notes":"Generated different_parents/2 instead of different_parent/2 and reversed the arguments of parent/2."}
+{"id":"fact_0492","error_types":["incorrect_predicate","incorrect_arity"],"semantically_correct":false,"notes":"Generated contacts/3 instead of calls/2 and added phone as a third argument."}
+{"id":"multi_0140","error_types":["incorrect_predicate","reversed_arguments"],"semantically_correct":false,"notes":"Generated different_parents/2 instead of different_parent/2 and reversed the arguments of parent/2."}
+{"id":"multi_0308","error_types":["incorrect_predicate","reversed_arguments"],"semantically_correct":false,"notes":"Generated different_parents/2 instead of different_parent/2 and reversed the arguments of parent/2."}
+{"id":"multi_0280","error_types":["incorrect_predicate","reversed_arguments"],"semantically_correct":false,"notes":"Generated different_parents/2 instead of different_parent/2 and reversed the arguments of parent/2."}
+{"id":"multi_0111","error_types":["incorrect_predicate","reversed_arguments"],"semantically_correct":false,"notes":"Generated different_parents/2 instead of different_parent/2 and reversed the arguments of parent/2."}
+{"id":"fact_0405","error_types":["incorrect_predicate"],"semantically_correct":false,"notes":"Generated respects/2 instead of the target predicate admires/2."}
+{"id":"fact_0420","error_types":["incorrect_predicate"],"semantically_correct":false,"notes":"Generated looks_up_to/2 instead of the target predicate admires/2."}
+{"id":"multi_0410","error_types":["incorrect_predicate"],"semantically_correct":false,"notes":"Generated fly/1 instead of the target predicate can_fly/1."}
+{"id":"fact_0472","error_types":["incorrect_predicate","incorrect_arity"],"semantically_correct":false,"notes":"Generated contacts/3 instead of calls/2 and added phone as a third argument."}
+{"id":"multi_0219","error_types":["incorrect_predicate","reversed_arguments"],"semantically_correct":false,"notes":"Generated different_parents/2 instead of different_parent/2 and reversed the arguments of parent/2."}
+{"id":"multi_0256","error_types":["incorrect_predicate","reversed_arguments","missing_condition","incorrect_structure"],"semantically_correct":false,"notes":"Generated parent/2 as the rule head instead of different_parent/2, reversed the parent/2 arguments, and omitted the X \\= Y inequality condition."}
