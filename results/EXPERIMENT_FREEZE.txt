@@ -1,0 +1,97 @@
+FINAL EXPERIMENT FREEZE
+
+Project:
+Training Small Language Models for Autoformalization to Prolog
+
+Base model:
+Qwen/Qwen2.5-1.5B-Instruct
+
+Fine-tuning method:
+QLoRA
+
+Random seed:
+4242564
+
+Dataset v1:
+Total examples: 2000
+
+Frozen split:
+Train: 1597
+Validation: 204
+Test: 199
+
+Refinement dataset v2:
+250 targeted examples
+
+V2 training set:
+1847 examples
+
+Validation set:
+Unchanged from v1
+
+Test set:
+Unchanged frozen 199-example test set
+
+Training epochs:
+3
+
+Final model:
+models/qwen2.5-1.5b-prolog-lora-v2
+
+Baseline results:
+Exact Match: 1/199 (0.50%)
+Syntax Valid: 79/199 (39.70%)
+Executable: 79/199 (39.70%)
+Reasoning Correct: 10/41 (24.39%)
+
+Fine-tuned v1 results:
+Exact Match: 162/199 (81.41%)
+Syntax Valid: 199/199 (100.00%)
+Executable: 199/199 (100.00%)
+Reasoning Correct: 41/41 (100.00%)
+
+Fine-tuned v2 results:
+Exact Match: 175/199 (87.94%)
+Syntax Valid: 199/199 (100.00%)
+Executable: 199/199 (100.00%)
+Reasoning Correct: 41/41 (100.00%)
+
+V1 non-exact predictions:
+37
+
+V2 non-exact predictions:
+24
+
+V1 -> V2 exact-match improvement:
++6.53 percentage points
+
+V1 -> V2 relative reduction in non-exact predictions:
+35.14%
+
+V1 -> V2 transitions:
+14 v1 failures corrected by v2
+1 v1 exact prediction regressed in v2
+
+Final figures:
+results/figures/overall_performance.png
+results/figures/exact_match_by_category.png
+results/figures/error_distribution_v1_v2.png
+results/figures/training_loss.png
+
+Final comparison:
+results/final_comparison.json
+
+Representative examples:
+results/representative_examples.json
+
+Experiment status:
+FROZEN
+
+No further changes should be made to:
+- frozen test set
+- final v2 refinement dataset
+- final v2 training set
+- final v2 model
+- final evaluation outputs
+
+Any later changes should be treated as a separate experiment.

@@ -1,0 +1,88 @@
+{
+    "base_fail_v1_v2_success": {
+        "id": "multi_0040",
+        "category": "multi_condition_rule",
+        "level": 3,
+        "template_group": "study_attendance_success",
+        "natural_language": "If it is established that a person studies and that they attend classes, then they are a successful student.",
+        "reference_prolog": "successful_student(X) :- studies(X), attends_classes(X).",
+        "baseline": {
+            "generated_prolog": "```\nstudying(X) :- attends_classes(X).\n```",
+            "exact_match": false
+        },
+        "finetuned_v1": {
+            "generated_prolog": "successful_student(X) :- studies(X), attends_classes(X).",
+            "exact_match": true
+        },
+        "finetuned_v2": {
+            "generated_prolog": "successful_student(X) :- studies(X), attends_classes(X).",
+            "exact_match": true
+        }
+    },
+    "v1_fail_v2_success": {
+        "id": "multi_0027",
+        "category": "multi_condition_rule",
+        "level": 3,
+        "template_group": "employee_not_busy",
+        "natural_language": "An employee can be considered available when there is no evidence they are busy.",
+        "reference_prolog": "available(X) :- employee(X), \\+ busy(X).",
+        "baseline": {
+            "generated_prolog": "available(Employee) :- not(busy(Employee)).",
+            "exact_match": false
+        },
+        "finetuned_v1": {
+            "generated_prolog": "available(X) :- free(X), \\+ busy(X).",
+            "exact_match": false
+        },
+        "finetuned_v2": {
+            "generated_prolog": "available(X) :- employee(X), \\+ busy(X).",
+            "exact_match": true
+        }
+    },
+    "v1_success_v2_fail": {
+        "id": "multi_0237",
+        "category": "multi_condition_rule",
+        "level": 3,
+        "template_group": "bird_not_flightless",
+        "natural_language": "If an entity is a bird and is not provably flightless, it can fly.",
+        "reference_prolog": "can_fly(X) :- bird(X), \\+ flightless(X).",
+        "baseline": {
+            "generated_prolog": "```\nis_flying(Entity) :-\n    (   is_bird(Entity)\n    ;   \\+ is_flightless(Entity)\n    ),\n    flying(Entity).\n```",
+            "exact_match": false
+        },
+        "finetuned_v1": {
+            "generated_prolog": "can_fly(X) :- bird(X), \\+ flightless(X).",
+            "exact_match": true
+        },
+        "finetuned_v2": {
+            "generated_prolog": "can_fly(X) :- bird(X), \\+ cannot_fly(X).",
+            "exact_match": false
+        }
+    },
+    "v2_remaining_failure": {
+        "id": "multi_0111",
+        "category": "multi_condition_rule",
+        "level": 3,
+        "template_group": "shared_child_inequality",
+        "natural_language": "When X and Y are parents of the same child and differ from one another, they are different parents.",
+        "reference_prolog": "different_parent(X, Y) :- parent(X, Z), parent(Y, Z), X \\= Y.",
+        "baseline": {
+            "generated_prolog": "```prolog\nparent(X, _, _) :- \\+ (X = Y).\n```",
+            "exact_match": false
+        },
+        "finetuned_v1": {
+            "generated_prolog": "different_parents(X, Y) :- parent(Z, X), parent(Z, Y), X \\= Y.",
+            "exact_match": false
+        },
+        "finetuned_v2": {
+            "generated_prolog": "different_parents(X, Y) :- parent(Z, X), parent(Z, Y), X \\= Y.",
+            "exact_match": false
+        }
+    },
+    "candidate_counts": {
+        "base_fail_v1_v2_success": 160,
+        "v1_fail_v2_success": 14,
+        "v1_success_v2_fail": 1,
+        "v2_failures": 24
+    }
+}
