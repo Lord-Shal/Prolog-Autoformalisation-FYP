@@ -11,7 +11,7 @@ def get_paths(run_name):
     return (
         result_dir / "predictions.jsonl",
         result_dir / "evaluated.jsonl",
-        result_dir / "metrics.jsonl"
+        result_dir / "metrics.json"
     )
 
 def load_jsonl(path):
