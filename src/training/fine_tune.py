@@ -13,10 +13,10 @@ from trl import SFTConfig, SFTTrainer
 
 MODEL_NAME = "Qwen/Qwen2.5-1.5B-Instruct"
 
-TRAIN_PATH = Path("dataset/splits/train.jsonl")
+TRAIN_PATH = Path("dataset/splits/train_v2.jsonl")
 VALIDATION_PATH = Path("dataset/splits/validation.jsonl")
 
-OUTPUT_DIR = Path("models/qwen2.5-1.5b-prolog-lora")
+OUTPUT_DIR = Path("models/qwen2.5-1.5b-prolog-lora-v2")
 CHECKPOINT_DIR = Path("models/checkpoints/qwen2.5-1.5b-prolog")
 
 SEED = 4242564
