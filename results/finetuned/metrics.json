@@ -16,9 +16,9 @@
         "percentage": 100.0
     },
     "reasoning_correct": {
-        "correct": 41,
+        "correct": 36,
         "total": 41,
-        "percentage": 100.0
+        "percentage": 87.8
     },
     "by_category": {
         "fact": {

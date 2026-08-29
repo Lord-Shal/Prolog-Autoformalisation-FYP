@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: Dissertation.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: plain.bst
+Reallocating 'name_of_file' (item size: 1) to 13 items.
+Database file #1: bibliography.bib
+Warning--I didn't find a database entry for "yang2025prolog"
+You've used 8 entries,
+            2118 wiz_defined-function locations,
+            542 strings with 6055 characters,
+and the built_in function-call counts, 4650 in all, are:
+= -- 453
+> -- 239
+< -- 9
++ -- 94
+- -- 86
+* -- 323
+:= -- 672
+add.period$ -- 24
+call.type$ -- 8
+change.case$ -- 67
+chr.to.int$ -- 0
+cite$ -- 8
+duplicate$ -- 193
+empty$ -- 343
+format.name$ -- 86
+if$ -- 1031
+int.to.chr$ -- 0
+int.to.str$ -- 8
+missing$ -- 8
+newline$ -- 43
+num.names$ -- 16
+pop$ -- 90
+preamble$ -- 1
+purify$ -- 59
+quote$ -- 0
+skip$ -- 176
+stack$ -- 0
+substring$ -- 336
+swap$ -- 99
+text.length$ -- 9
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 32
+warning$ -- 0
+while$ -- 37
+width$ -- 9
+write$ -- 91
+(There was 1 warning)

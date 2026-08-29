@@ -1,0 +1,57 @@
+\begin{thebibliography}{1}
+
+\bibitem{bao2022pararule}
+Qiming Bao, Alex~Yuxuan Peng, Tim Hartill, Neset Tan, Zhenyun Deng, Michael
+  Witbrock, and Jiamou Liu.
+\newblock Multi-step deductive reasoning over natural language: An empirical
+  study on out-of-distribution generalisation.
+\newblock In {\em Proceedings of the 16th International Workshop on
+  Neural-Symbolic Learning and Reasoning}, pages 202--217, 2022.
+
+\bibitem{clark2020ruletaker}
+Peter Clark, Oyvind Tafjord, and Kyle Richardson.
+\newblock Transformers as soft reasoners over language.
+\newblock In {\em Proceedings of the Twenty-Ninth International Joint
+  Conference on Artificial Intelligence (IJCAI-20)}, pages 3882--3890, 2020.
+
+\bibitem{dettmers2023qlora}
+Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, and Luke Zettlemoyer.
+\newblock Qlora: Efficient finetuning of quantized llms.
+\newblock In {\em Advances in Neural Information Processing Systems},
+  volume~36, pages 10088--10115, 2023.
+
+\bibitem{hu2021lora}
+Edward~J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean
+  Wang, Lu~Wang, and Weizhu Chen.
+\newblock Lora: Low-rank adaptation of large language models.
+\newblock In {\em International Conference on Learning Representations}, 2022.
+
+\bibitem{mellgren2026prolog}
+Niklas Mellgren, Peter Schneider-Kamp, and Lukas~Galke Poech.
+\newblock Training language models to use prolog as a tool.
+\newblock In {\em Findings of the Association for Computational Linguistics:
+  ACL 2026}, pages 32860--32880, 2026.
+
+\bibitem{olausson2023linc}
+Theo~X. Olausson, Alex Gu, Benjamin Lipkin, Cedegao~E. Zhang, Armando
+  Solar-Lezama, Joshua~B. Tenenbaum, and Roger Levy.
+\newblock Linc: A neurosymbolic approach for logical reasoning by combining
+  language models with first-order logic provers.
+\newblock In {\em Proceedings of the 2023 Conference on Empirical Methods in
+  Natural Language Processing}, pages 5153--5176, 2023.
+
+\bibitem{pan2023logiclm}
+Liangming Pan, Alon Albalak, Xinyi Wang, and William~Yang Wang.
+\newblock Logic-lm: Empowering large language models with symbolic solvers for
+  faithful logical reasoning.
+\newblock In {\em Findings of the Association for Computational Linguistics:
+  EMNLP 2023}, pages 3806--3824, 2023.
+
+\bibitem{wu2022autoformalization}
+Yuhuai Wu, Albert~Qiaochu Jiang, Wenda Li, Markus~N. Rabe, Charles Staats,
+  Mateja Jamnik, and Christian Szegedy.
+\newblock Autoformalization with large language models.
+\newblock In {\em Advances in Neural Information Processing Systems},
+  volume~35, pages 32353--32368, 2022.
+
+\end{thebibliography}

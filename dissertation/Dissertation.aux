@@ -1,0 +1,93 @@
+\relax 
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Background and Related Work}{3}{}\protected@file@percent }
+\citation{clark2020ruletaker}
+\citation{wu2022autoformalization}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Language Models and Logical Reasoning}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Autoformalization}{4}{}\protected@file@percent }
+\citation{pan2023logiclm}
+\citation{olausson2023linc}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Prolog as a Symbolic Representation}{5}{}\protected@file@percent }
+\citation{yang2025neurosymbolic}
+\citation{mellgren2026prolog}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Natural-Language Reasoning Datasets}{6}{}\protected@file@percent }
+\citation{bao2022pararule}
+\citation{hu2021lora}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Small Language Models and Parameter-Efficient Fine-Tuning}{7}{}\protected@file@percent }
+\citation{dettmers2023qlora}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Position of This Project}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Dataset Design and Construction}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Dataset Design}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Dataset Structure}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Difficulty Levels}{11}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Vocabulary and Template Generation}{11}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Automated Prolog Validation}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Training, Validation and Test Split}{13}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Final Dataset}{13}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Methodology and System Design}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}System Architecture}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Model and Hardware}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Input and Output Format}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Baseline Evaluation}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}QLoRA Implementation}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Refinement Training}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Prolog Execution and Validation}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8}Evaluation Metrics}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.9}Reproducibility and Experimental Control}{18}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Training, inference and software configuration used in the experiments.}}{19}{}\protected@file@percent }
+\newlabel{tab:experimental_config}{{1}{19}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Experiments and Results}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Baseline Evaluation}{20}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Baseline evaluation results.}}{20}{}\protected@file@percent }
+\newlabel{tab:baseline-results}{{2}{20}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Initial Fine-Tuned Model}{21}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Comparison between the baseline and first fine-tuned model.}}{22}{}\protected@file@percent }
+\newlabel{tab:v1-results}{{3}{22}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Performance by Difficulty Level}{22}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Training loss during QLoRA fine-tuning.}}{23}{}\protected@file@percent }
+\newlabel{fig:training_loss}{{1}{23}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Exact-match performance of Fine-Tuned v1 by category.}}{23}{}\protected@file@percent }
+\newlabel{tab:v1-category}{{4}{23}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Error Analysis}{24}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Most common non-exact template groups for Fine-Tuned v1.}}{24}{}\protected@file@percent }
+\newlabel{tab:v1-errors}{{5}{24}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Targeted Refinement Dataset}{25}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Distribution of the targeted refinement dataset.}}{25}{}\protected@file@percent }
+\newlabel{tab:refinement-distribution}{{6}{25}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6}Refined Model Results}{26}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Comparison between Fine-Tuned v1 and Fine-Tuned v2.}}{26}{}\protected@file@percent }
+\newlabel{tab:v2-results}{{7}{26}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Exact-match performance of Fine-Tuned v2 by category.}}{27}{}\protected@file@percent }
+\newlabel{tab:v2-category}{{8}{27}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Exact-match accuracy by dataset category for Fine-Tuned v1 and Fine-Tuned v2.}}{27}{}\protected@file@percent }
+\newlabel{fig:category_accuracy}{{2}{27}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.7}Remaining Errors}{27}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Most common remaining failure groups for Fine-Tuned v2.}}{28}{}\protected@file@percent }
+\newlabel{tab:v2-errors}{{9}{28}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Distribution of manually identified errors for Fine-Tuned v1 and Fine-Tuned v2.}}{28}{}\protected@file@percent }
+\newlabel{fig:error_distribution}{{3}{28}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.8}Overall Comparison}{29}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Overall comparison of the three evaluated model versions.}}{29}{}\protected@file@percent }
+\newlabel{tab:overall-comparison}{{10}{29}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Overall performance of the baseline, Fine-Tuned v1 and Fine-Tuned v2 models.}}{30}{}\protected@file@percent }
+\newlabel{fig:overall_performance}{{4}{30}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{30}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Effect of Fine-Tuning}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Symbolic Execution as an Evaluation Tool}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Reasoning Correctness}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Remaining Difficulties}{33}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Effect of Targeted Refinement}{34}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Dataset and Experimental Limitations}{34}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion and Future Work}{35}{}\protected@file@percent }
+\bibstyle{plain}
+\bibdata{bibliography}
+\bibcite{bao2022pararule}{1}
+\bibcite{clark2020ruletaker}{2}
+\bibcite{dettmers2023qlora}{3}
+\@writefile{toc}{\contentsline {section}{References}{37}{}\protected@file@percent }
+\bibcite{hu2021lora}{4}
+\bibcite{mellgren2026prolog}{5}
+\bibcite{olausson2023linc}{6}
+\bibcite{pan2023logiclm}{7}
+\bibcite{wu2022autoformalization}{8}
+\gdef \@abspage@last{43}
