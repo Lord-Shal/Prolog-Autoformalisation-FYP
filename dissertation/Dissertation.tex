@@ -9,6 +9,7 @@
 \usepackage{tcolorbox}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{url}
 
 \emergencystretch=5mm
 \tolerance=400
@@ -179,6 +180,13 @@ show that task-specific fine-tuning can substantially improve a small language
 model's ability to generate valid executable Prolog, while also identifying
 translation structures for which exact generation remains more difficult.
 
+The project also provides experience relevant to future work in artificial
+intelligence and software development. It involves practical work in language
+model fine-tuning, dataset construction, automated evaluation and symbolic
+reasoning, together with the design of a reproducible experimental pipeline.
+These skills are applicable to future work involving machine learning,
+generative AI and the development and evaluation of reliable AI systems.
+
 The remainder of this dissertation develops this investigation in detail:
 
 \begin{itemize}
@@ -280,19 +288,19 @@ Pan et al.~\cite{pan2023logiclm} developed this idea further with Logic-LM, a
 framework in which an LLM first translates a natural-language reasoning problem
 into a symbolic formulation. A deterministic symbolic solver then performs the actual
 inference. Logic-LM was evaluated on five reasoning datasets, including
-ProofWriter and FOLIO, and produced substantial improvements over both standard
-prompting and chain-of-thought prompting. This framework also included a
-refinement stage that used error messages from the symbolic solver to revise
-incorrect formalizations.
+ProofWriter~\cite{tafjord2021proofwriter} and FOLIO, and produced substantial
+improvements over both standard prompting and chain-of-thought prompting. This
+framework also included a refinement stage that used error messages from the
+symbolic solver to revise incorrect formalizations.
 
 A similar approach is used by Olausson et al.~\cite{olausson2023linc} in LINC,
 or Logical Inference via Neurosymbolic Computation. This system treats the language model
 as a semantic parser that translates natural-language premises and conclusions
 into first-order logic. Deductive reasoning is then delegated to an external
-theorem prover. Their experiments on ProofWriter and FOLIO found that this
-separation could outperform direct chain-of-thought reasoning. This approach
-also produced strong results when using an open-source model smaller than the
-largest proprietary models evaluated in the study.
+theorem prover. Their experiments on ProofWriter~\cite{tafjord2021proofwriter}
+and FOLIO found that this separation could outperform direct chain-of-thought
+reasoning. This approach also produced strong results when using an open-source
+model smaller than the largest proprietary models evaluated in the study.
 
 These systems support the central principle behind the present project: a
 language model does not necessarily need to perform every part of logical
@@ -310,17 +318,21 @@ particular conclusions follow from those facts and rules.
 
 For example, the statements:
 
+\begin{tcolorbox}
 \begin{lstlisting}[language=Prolog]
 doctor(mary).
 professional(X) :- doctor(X).
 \end{lstlisting}
+\end{tcolorbox}
 
 represent the fact that Mary is a doctor and the rule that every doctor is a
 professional. A query such as:
 
+\begin{tcolorbox}
 \begin{lstlisting}[language=Prolog]
 professional(mary).
 \end{lstlisting}
+\end{tcolorbox}
 
 can then be evaluated by the Prolog system. Prolog uses mechanisms including
 unification and proof search to determine whether a query follows from the
@@ -424,24 +436,35 @@ or substantially larger language models.
 \subsection{Position of This Project}
 
 Previous research provides strong evidence for combining neural language
-understanding with symbolic reasoning. Autoformalization work has shown that
-language models can translate informal statements into formal languages, while
-Logic-LM and LINC demonstrate the value of delegating inference to
-deterministic symbolic solvers. RuleTaker and PARARULE-Plus further show how
-controlled natural-language datasets can be used to investigate logical
-reasoning systematically. Recent Prolog-based work also demonstrates growing
-interest in using executable logic programs as an interface between language
-models and formal reasoning.
+understanding with symbolic reasoning. Autoformalization work has shown
+that language models can translate informal statements into formal languages,
+while Logic-LM and LINC demonstrate the value of delegating inference to
+deterministic symbolic solvers. RuleTaker and PARARULE-Plus further show
+how controlled natural-language datasets can be used to investigate logical
+reasoning systematically. Recent Prolog-based work also demonstrates
+growing interest in using executable logic programs as an interface between
+language models and formal reasoning.
 
-The present project focuses on a narrower question within this area. This
-project does not test whether a large general-purpose model can be prompted to
-produce symbolic representations; instead, it investigates whether a
+Despite these similarities, the present project differs from this previous work
+in its primary experimental focus. RuleTaker and PARARULE-Plus primarily
+evaluate reasoning over natural-language facts and rules rather than
+generation of an executable formal representation. Logic-LM and LINC use
+language models as components within neuro-symbolic reasoning pipelines,
+whereas this project isolates the formalization stage as the principal learning
+task. The Prolog-based work of Mellgren et al. similarly demonstrates the value
+of executable symbolic programs, but uses a larger Qwen2.5-3B-Instruct model
+and investigates Prolog as an external reasoning tool. In contrast, the present
+project examines direct task-specific adaptation of Qwen2.5-1.5B-Instruct for
+NL--Prolog translation.
+
+The central question is therefore not whether a large general-purpose language
+model can be prompted to produce symbolic representations, but whether a
 1.5-billion-parameter model can be explicitly trained to perform NL--Prolog
-translation. It also evaluates the generated output at several levels,
-separating exact textual agreement from syntax validity, executability and
-reasoning correctness. This provides a practical investigation of whether
-relatively small language models can learn a reliable interface between
-natural language and executable symbolic reasoning.
+translation reliably within a controlled domain. The generated output is evaluated
+at several levels, separating exact textual agreement from syntactic validity,
+executability and reasoning correctness. This allows the experiments to distinguish
+between learning the surface form of Prolog, producing executable programs
+and preserving sufficient logical structure to support correct symbolic inference.
 
 % ============================================================
 \clearpage
@@ -451,7 +474,7 @@ natural language and executable symbolic reasoning.
 The dataset is a central component of this project because fine-tuning requires
 paired examples showing the relationship between natural-language statements and
 their expected Prolog representations. Existing datasets such as RuleTaker,
-ProofWriter and PARARULE-Plus provide large collections of controlled
+ProofWriter \cite{tafjord2021proofwriter} and PARARULE-Plus provide large collections of controlled
 natural-language reasoning problems. However, their primary objective is usually
 to determine whether a conclusion follows from a collection of facts and rules
 rather than to train a model to generate executable Prolog directly. A dedicated
@@ -471,7 +494,7 @@ Synthetic generation was chosen because it provides direct control over both
 sides of each training pair. Similar approaches have previously been used for
 logical reasoning datasets. RuleTaker generates theories containing
 natural-language facts and rules from a configurable grammar and derives labels
-using a reasoning engine. ProofWriter extends this style of dataset with rule
+using a reasoning engine. ProofWriter \cite{tafjord2021proofwriter} extends this style of dataset with rule
 bases, questions and proofs of different depths. PARARULE-Plus similarly
 generates large numbers of natural-language reasoning examples involving people,
 animals, attributes and relationships.
@@ -484,17 +507,27 @@ each example pairs natural language directly with its expected Prolog program.
 
 An example of a simple pair is:
 
-\begin{lstlisting}
-Natural language: Mary is a doctor.
-Prolog: doctor(mary).
-\end{lstlisting}
+\begin{tcolorbox}
+
+\textbf{Natural language:} Mary is a doctor.
+
+\medskip
+
+\textbf{Prolog:} \texttt{doctor(mary).}
+
+\end{tcolorbox}
 
 A rule can be represented as:
 
-\begin{lstlisting}
-Natural language: Every doctor is a professional.
-Prolog: professional(X) :- doctor(X).
-\end{lstlisting}
+\begin{tcolorbox}
+
+\textbf{Natural language:} Every doctor is a professional.
+
+\medskip
+
+\textbf{Prolog:} \texttt{professional(X) :- doctor(X).}
+
+\end{tcolorbox}
 
 The direct pairing makes the required model behaviour explicit. The model
 receives a natural-language statement and is trained to return only its Prolog
@@ -614,7 +647,7 @@ whether the generated output resembles the reference representation and test
 whether the resulting program supports the expected inference.
 
 The use of progressively more difficult structures follows a similar principle
-to datasets such as ProofWriter and PARARULE-Plus, where reasoning problems are
+to datasets such as ProofWriter \cite{tafjord2021proofwriter} and PARARULE-Plus, where reasoning problems are
 organised according to inference depth. The levels in this project are not
 equivalent to their reasoning depths because they measure translation complexity
 rather than only the number of inference steps. Nevertheless, both approaches
@@ -694,9 +727,12 @@ direct leakage between structurally related examples and provides a more
 meaningful test of whether the model has learned mappings that extend beyond
 individual generated examples.
 
-The test set was kept fixed throughout the baseline, initial fine-tuning and
-refinement experiments. Maintaining the same test data made direct comparisons
-between model versions more reliable.
+The test set was kept fixed throughout the baseline, initial fine-tuning
+and refinement experiments to support direct comparison between model
+versions. However, error patterns observed on this test set subsequently
+informed construction of the refinement dataset, meaning that the
+refined-model evaluation was not fully independent. This limitation is
+discussed further in Chapters 5 and 6.
 
 \subsection{Final Dataset}
 
@@ -844,25 +880,26 @@ evaluation procedure.
 \subsection{QLoRA Implementation}
 
 QLoRA was used to adapt Qwen2.5-1.5B-Instruct to the NL--Prolog translation
-task. The implementation combined 4-bit loading of the base model with trainable
-LoRA adapter layers.
+task. The implementation combined 4-bit NF4 quantisation of the base model
+with trainable LoRA adapter layers.
 
-The base model was loaded in 4-bit quantised form. Its original parameters were
-frozen during training. Trainable low-rank adapter parameters were inserted into
-selected model layers, and only these adapter parameters were updated. The
-resulting training process required substantially less GPU memory than updating
-all model parameters.
+The base model was loaded in 4-bit quantised form, with \texttt{float16} used
+as the quantisation compute datatype. Explicit FP16 and BF16 mixed-precision
+training were disabled in the supervised fine-tuning configuration. The
+original model parameters were frozen during training, while trainable
+low-rank adapter parameters were inserted into selected model layers and
+updated during fine-tuning. This reduced the GPU memory required compared
+with full-parameter fine-tuning.
 
-The first fine-tuning run used the 1,597 examples in the training split. The 204
-validation examples were kept separate and were not included in the training
-data. Training was performed for three epochs with a per-device batch size of
-two. The random seed was set to \texttt{4242564}.
+The first fine-tuning run used the 1,597 examples in the training split. The
+204 validation examples were kept separate and were not included in the
+training data. Training was performed for three epochs with a per-device batch
+size of two and gradient accumulation over four steps, giving an effective
+batch size of eight. The random seed was set to \texttt{4242564}.
 
-Training was carried out using the TRL supervised fine-tuning pipeline. The
-model used float16 computation where supported, while the base model remained
-loaded using 4-bit quantisation. The trained adapter was saved separately from
-the base Qwen model. During inference, the adapter was loaded together with the
-original base model.
+Training was carried out using the TRL supervised fine-tuning pipeline.
+The trained adapter was saved separately from the base Qwen model. During
+inference, the adapter was loaded together with the original base model.
 
 The implementation therefore did not create a new full copy of
 Qwen2.5-1.5B. Instead, it retained the quantised base model and stored the
@@ -984,10 +1021,17 @@ earlier results and allowed the models to be evaluated independently.
 \hline
 Base model & Qwen2.5-1.5B-Instruct \\
 Fine-tuning method & QLoRA \\
-Quantisation & 4-bit \\
-Training precision & float16 \\
+Quantisation & 4-bit NF4 \\
+Quantisation compute datatype & float16 \\
 Training epochs & 3 \\
 Per-device batch size & 2 \\
+Gradient accumulation steps & 4 \\
+Effective batch size & 8 \\
+Learning rate & $2 \times 10^{-4}$ \\
+LoRA rank ($r$) & 16 \\
+LoRA alpha & 32 \\
+LoRA dropout & 0.05 \\
+Maximum sequence length & 512 \\
 Random seed & 4242564 \\
 Original training examples & 1,597 \\
 Validation examples & 204 \\
@@ -1126,7 +1170,7 @@ Table~\ref{tab:v1-results}.
 Exact Match       & 0.50\%  & 81.41\%  \\
 Syntax Valid      & 39.70\% & 100.00\% \\
 Executable        & 39.70\% & 100.00\% \\
-Reasoning Correct & 14.63\% & 87.80\%  \\
+Reasoning Correct & 14.63\% & 100.00\%  \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1140,7 +1184,7 @@ was executable. Compared with the baseline, where more than half of the outputs
 could not be successfully interpreted as Prolog, this suggests that the model
 learned the required output syntax reliably from the supervised examples.
 
-Reasoning correctness also increased substantially, from 14.63\% to 87.80\%.
+Reasoning correctness also increased substantially, from 14.63\% to 100.00\%.
 The fine-tuned model therefore improved not only in reproducing the reference
 strings but also in generating knowledge bases capable of supporting the
 expected queries.
@@ -1335,7 +1379,7 @@ The results are shown in Table~\ref{tab:v2-results}.
 Exact Match       & 81.41\%  & \textbf{87.94\%}  \\
 Syntax Valid      & 100.00\% & \textbf{100.00\%} \\
 Executable        & 100.00\% & \textbf{100.00\%} \\
-Reasoning Correct & 87.80\%  & \textbf{100.00\%} \\
+Reasoning Correct & 100.00\%  & \textbf{100.00\%} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1343,14 +1387,15 @@ Reasoning Correct & 87.80\%  & \textbf{100.00\%} \\
 Exact-match accuracy increased from 162 to 175 correct predictions. This
 corresponds to an improvement of 6.53 percentage points over the first
 fine-tuned model and 87.44 percentage points over the original baseline.
+Syntax validity, executability and reasoning correctness remained at 100\%.
 
 All 199 outputs remained syntactically valid and executable. The additional
 fine-tuning therefore improved translation accuracy without reducing the
 structural reliability achieved by the first model.
 
-Most notably, reasoning correctness increased to 41 out of 41 examples. All
-Level 4 queries therefore produced their expected results under the final
-model.
+Reasoning correctness remained at 41 out of 41 examples. All Level 4
+queries therefore continued to produce their expected results under the
+refined model.
 
 These final results require an important qualification. The refinement dataset
 was constructed after analysing recurring error patterns observed on the
@@ -1460,8 +1505,10 @@ validity and exact semantic translation. Despite these failures, every output
 remained syntactically valid and executable. The remaining challenge was
 therefore not primarily producing legal Prolog syntax. It was producing the
 precise predicates, argument relationships and logical operations specified by
-the natural-language input.
-
+the natural-language input. This indicates that, after fine-tuning, the
+dominant source of error had shifted from structural Prolog generation to
+semantic alignment between the natural-language input and the generated
+symbolic representation.
 
 \subsection{Overall Comparison}
 
@@ -1485,7 +1532,7 @@ Table~\ref{tab:overall-comparison}.
 \textbf{Reasoning Correct} \\
 \midrule
 Baseline      & 0.50\%  & 39.70\%  & 39.70\%  & 14.63\% \\
-Fine-Tuned v1 & 81.41\% & 100.00\% & 100.00\% & 87.80\% \\
+Fine-Tuned v1 & 81.41\% & 100.00\% & 100.00\% & 100.00\% \\
 Fine-Tuned v2 & \textbf{87.94\%} &
                 \textbf{100.00\%} &
                 \textbf{100.00\%} &
@@ -1494,11 +1541,13 @@ Fine-Tuned v2 & \textbf{87.94\%} &
 \end{tabular}
 \end{table}
 
-The largest improvement occurred between the baseline and first fine-tuned
-model. This indicates that supervised task-specific adaptation was responsible
-for most of the performance gain. Refinement produced a smaller but still
-measurable additional improvement, particularly for simple and multi-condition
-rules.
+The largest improvement occurred between the baseline and first fine-tuned model,
+with exact-match accuracy increasing from 0.50\% to 81.41\%. This indicates that
+supervised task-specific adaptation was responsible for the majority of the observed
+performance gain. Targeted refinement produced a smaller additional increase from
+81.41\% to 87.94\%, suggesting that the second training stage primarily addressed
+specific residual weaknesses rather than fundamentally changing the model's
+overall translation capability.
 
 \begin{figure}[htbp]
     \centering
@@ -1510,8 +1559,8 @@ rules.
 Figure 4 visualises the overall progression across the three model versions.
 Fine-tuning produced a substantial improvement across all four evaluation
 metrics, particularly when compared with the original baseline. The
-refinement stage produced a further increase in exact-match and reasoning
-accuracy while maintaining 100\% syntax validity and executability.
+refinement stage produced a further increase in exact-match accuracy
+while maintaining 100\% syntax validity, executability and reasoning correctness.
 
 The results also provide evidence for the usefulness of evaluating symbolic
 generation at more than one level. If only syntax validity had been measured,
@@ -1607,7 +1656,7 @@ Execution-based evaluation is particularly appropriate for formal outputs
 because it takes advantage of information that is unavailable when evaluating
 unrestricted natural language. Previous work on natural-language-to-code
 translation has similarly demonstrated that program execution can provide
-useful semantic information beyond execution-unaware comparison. Candidate
+useful semantic information beyond execution-unaware comparison \cite{shi2022execution}. Candidate
 programs can, for example, be distinguished according to their execution
 behaviour rather than assuming that surface similarity alone determines
 correctness.
@@ -1625,14 +1674,22 @@ reversing arguments in \texttt{parent/2} produces a syntactically valid program
 representing a different relationship. Therefore, execution should complement
 rather than replace semantic evaluation.
 
+At the same time, successful execution cannot by itself establish that a
+generated program faithfully represents the natural-language input. A program
+may be syntactically valid and execute successfully while using an incorrect
+predicate or reversing the arguments of a relation. Symbolic execution can
+therefore verify properties of the representation it receives, but it cannot
+by itself verify that the representation is a semantically faithful
+formalization of the original statement.
 
 \subsection{Reasoning Correctness}
 
-Reasoning accuracy showed one of the largest improvements, increasing from
-14.63\% for the baseline to 87.80\% for the first fine-tuned model and 100\%
-for the refined model. This provides evidence that the generated programs were
-not merely syntactically well formed. For the 41 reasoning examples in the
-final test set, every program supported the expected query result.
+Reasoning accuracy showed one of the largest improvements between the baseline
+and fine-tuned models, increasing from 14.63\% for the baseline to 100\% for
+the first fine-tuned model and remaining at 100\% for the refined model. This
+provides evidence that the generated programs were not merely syntactically
+well formed. For the 41 reasoning examples in the final test set, every program
+generated by both fine-tuned models supported the expected query result.
 
 This result is consistent with the motivation of neuro-symbolic approaches
 such as Logic-LM and LINC. Logic-LM separates translation from inference by
@@ -1792,7 +1849,7 @@ natural-language-to-Prolog translation.
 
 QLoRA fine-tuning produced a substantial improvement. The first fine-tuned
 model achieved 81.41\% exact-match accuracy, while every generated program was
-syntactically valid and executable. Reasoning accuracy increased to 87.80\%.
+syntactically valid and executable. Reasoning accuracy increased to 100\%.
 Error analysis showed that the remaining failures were concentrated in
 particular structures rather than being evenly distributed across the dataset.
 Multi-condition rules were especially difficult, with recurring errors
@@ -1853,6 +1910,320 @@ show that combining task-specific language-model training with symbolic
 validation is a practical approach to producing more checkable forms of
 machine reasoning.
 
+% ============================================================
+\clearpage
+\section{How to Use My Project}
+\label{sec:code-usage}
+% ============================================================
+
+The source code accompanying this dissertation is provided in the project
+submission directory. It contains the scripts used to generate and validate
+the dataset, create the dataset splits, run model inference, fine-tune
+Qwen2.5-1.5B-Instruct using QLoRA, and evaluate the resulting models.
+
+This section provides instructions for reproducing the main experimental
+pipeline.
+
+All commands below should be executed from the root directory of the submitted
+project source code.
+
+
+\subsection{Requirements}
+
+The project was developed using Python and SWI-Prolog. The required Python
+packages and their versions are provided in \path{requirements.txt}.
+
+A CUDA-compatible NVIDIA GPU is required for fine-tuning with the submitted
+training script and is recommended for model inference, while SWI-Prolog must
+be installed separately and accessible through the \texttt{swipl} command.
+
+After extracting the submitted project files, open a terminal in the project
+root directory.
+
+\begin{lstlisting}
+python -m venv .venv
+\end{lstlisting}
+
+On Windows PowerShell, the environment can be activated using:
+
+\begin{lstlisting}
+.venv\Scripts\Activate.ps1
+\end{lstlisting}
+
+On Linux or macOS, it can instead be activated using:
+
+\begin{lstlisting}
+source .venv/bin/activate
+\end{lstlisting}
+
+The required Python packages can then be installed using:
+
+\begin{lstlisting}
+pip install -r requirements.txt
+\end{lstlisting}
+
+SWI-Prolog must also be installed before running dataset validation or
+evaluation. Its installation can be checked using:
+
+\begin{lstlisting}
+swipl --version
+\end{lstlisting}
+
+
+\subsection{Dataset Generation and Validation}
+
+The original NL--Prolog dataset can be generated from the project root using:
+
+\begin{lstlisting}
+python src/dataset/generate_dataset.py
+\end{lstlisting}
+
+This generates the natural-language and Prolog pairs used by the project,
+including their level, category and template-group metadata.
+
+The generated examples can then be validated using SWI-Prolog with:
+
+\begin{lstlisting}
+python src/evaluation/validate_dataset.py
+\end{lstlisting}
+
+The validation procedure checks whether the target Prolog programs are
+syntactically valid and executable. For reasoning examples, the associated
+query is additionally executed and compared with its expected result.
+
+After validation, the dataset can be divided into training, validation and
+test sets using:
+
+\begin{lstlisting}
+python src/dataset/split_dataset.py
+\end{lstlisting}
+
+The splitting procedure uses the fixed random seed \texttt{4242564} and
+assigns examples according to their template groups. This produces the fixed
+training, validation and test splits used in the experiments described in
+Chapters 4 and 5.
+
+
+\subsection{Baseline Inference}
+
+Baseline predictions are generated using the original
+Qwen2.5-1.5B-Instruct model without task-specific fine-tuning. Baseline
+inference can be run using:
+
+\begin{lstlisting}
+python src/inference/run_baseline.py
+\end{lstlisting}
+
+The model is instructed to return only Prolog code for each natural-language
+input. Generated predictions are stored under the baseline results directory
+for subsequent evaluation.
+
+
+\subsection{Model Fine-Tuning}
+
+Model fine-tuning is performed using:
+
+\begin{lstlisting}
+python src/training/fine_tune.py
+\end{lstlisting}
+
+The training script loads Qwen2.5-1.5B-Instruct using 4-bit NF4
+quantisation and trains LoRA adapters using QLoRA. The experiments use three
+training epochs, a per-device batch size of two, gradient accumulation over
+four steps, a learning rate of $2\times10^{-4}$ and the random seed
+\texttt{4242564}, as described in Chapter 4.
+
+The submitted version of \path{src/training/fine_tune.py} is configured for
+the final refined experiment and therefore uses
+\path{dataset/splits/train_v2.jsonl} as its training dataset. The resulting
+adapter is saved to:
+
+\begin{lstlisting}
+models/qwen2.5-1.5b-prolog-lora-v2
+\end{lstlisting}
+
+To reproduce the initial fine-tuned model, the constants at the beginning of
+\path{src/training/fine_tune.py} should instead be set to:
+
+\begin{lstlisting}
+TRAIN_PATH = Path("dataset/splits/train.jsonl")
+OUTPUT_DIR = Path("models/qwen2.5-1.5b-prolog-lora")
+\end{lstlisting}
+
+The LoRA adapters are stored separately from the original Qwen model, allowing
+the base model and each fine-tuned version to be evaluated independently.
+
+
+\subsection{Refinement Dataset and Second Training Stage}
+
+Following evaluation of the first fine-tuned model, the targeted refinement
+dataset used in the second training stage can be generated using:
+
+\begin{lstlisting}
+python src/dataset/generate_refinement_v2.py
+\end{lstlisting}
+
+This produces the additional 250 examples designed to increase representation
+of structures associated with recurring errors in the first fine-tuned model.
+
+The refinement examples can then be validated using:
+
+\begin{lstlisting}
+python src/dataset/validate_refinement_v2.py
+\end{lstlisting}
+
+The validated refinement examples are combined with the original training
+split to construct the second-stage training dataset using:
+
+\begin{lstlisting}
+python src/dataset/build_train_v2.py
+\end{lstlisting}
+
+This produces \path{dataset/splits/train_v2.jsonl}. The submitted
+\path{src/training/fine_tune.py} script is configured to use this file and
+save the refined adapter separately from the first fine-tuned model.
+
+As discussed in Chapters 5 and 6, the refinement data were designed after
+examining error patterns on the test set. The resulting refined-model
+evaluation should therefore not be interpreted as evaluation on a completely
+untouched test set.
+
+
+\subsection{Evaluation}
+
+Generated predictions can be evaluated using:
+
+\begin{lstlisting}
+python src/evaluation/evaluate_predictions.py
+\end{lstlisting}
+
+The evaluation procedure compares each prediction with its reference output
+and calculates exact-match accuracy. SWI-Prolog is additionally used to
+determine whether generated programs are syntactically valid and executable.
+
+For Level 4 reasoning examples, the associated query is executed against the
+generated program and its result is compared with the expected result. This
+produces the four principal evaluation measures used in the dissertation:
+exact match, syntax validity, executability and reasoning correctness.
+
+Detailed prediction-level results and aggregate metrics are stored in the
+corresponding subdirectories of \path{results/}.
+
+
+\subsection{Error Analysis}
+
+Errors in the generated predictions can be analysed using the project's error
+analysis script:
+
+\begin{lstlisting}
+python src/evaluation/analyse_errors.py
+\end{lstlisting}
+
+The analysis identifies non-exact predictions and groups performance according
+to properties such as dataset category, difficulty level and template group.
+These results were used to identify recurring translation weaknesses and to
+guide construction of the refinement dataset described in Chapter 5.
+
+
+\subsection{Reproducing the Experimental Workflow}
+
+To reproduce the main experimental procedure described in this dissertation,
+the scripts should be executed in the following order:
+
+\begin{enumerate}
+
+    \item Generate the original dataset using
+    \path{src/dataset/generate_dataset.py}.
+
+    \item Validate the generated examples using SWI-Prolog with
+    \path{src/evaluation/validate_dataset.py}.
+
+    \item Create the fixed training, validation and test splits using
+    \path{src/dataset/split_dataset.py}.
+
+    \item Generate predictions from the untuned baseline model using
+    \path{src/inference/run_baseline.py}.
+
+    \item Evaluate the baseline predictions using
+    \path{src/evaluation/evaluate_predictions.py}.
+
+    \item Configure \path{src/training/fine_tune.py} to use
+    \path{dataset/splits/train.jsonl} and save to
+    \path{models/qwen2.5-1.5b-prolog-lora}, then run the script to train
+    the initial QLoRA adapter.
+
+    \item Generate predictions from the fine-tuned model using
+    \path{src/inference/run_finetuned.py} and evaluate them using
+    \path{src/evaluation/evaluate_predictions.py}.
+
+    \item Analyse the remaining errors using
+    \path{src/evaluation/analyse_errors.py}.
+
+    \item Generate the targeted refinement dataset using
+    \path{src/dataset/generate_refinement_v2.py} and validate it using
+    \path{src/dataset/validate_refinement_v2.py}.
+
+    \item Construct the second training set using
+    \path{src/dataset/build_train_v2.py}, which combines the original
+    training data with the validated refinement examples.
+
+    \item Run \path{src/training/fine_tune.py} using its submitted
+    configuration, which uses \path{dataset/splits/train_v2.jsonl}, then
+    generate predictions using \path{src/inference/run_finetuned.py} and
+    evaluate them using
+    \path{src/evaluation/evaluate_predictions.py}.
+
+\end{enumerate}
+
+The project submission also contains the frozen dataset and saved experimental
+results. These can be inspected directly when reproducing dataset generation
+or model training is not required.
+
+% ============================================================
+\clearpage
+\section{Self-Assessment}
+\label{sec:self-assessment}
+% ============================================================
+
+Overall, I consider the project successful in achieving its primary objective
+of investigating whether a small language model could be trained to translate
+natural-language reasoning statements into executable Prolog. The completed
+work includes the construction and automated validation of a 2,000-example
+NL--Prolog dataset, implementation of a reproducible training and evaluation
+pipeline, QLoRA fine-tuning of Qwen2.5-1.5B-Instruct, error analysis and a
+targeted refinement experiment.
+
+The strongest aspect of the project was the improvement achieved through
+task-specific fine-tuning. Exact-match accuracy increased from 0.50\% for the
+baseline to 81.41\% after initial fine-tuning, while syntax validity and
+executability reached 100\%. Targeted refinement subsequently increased exact
+match to 87.94\%. The use of SWI-Prolog also allowed generated programs to be
+evaluated through execution rather than relying solely on textual comparison.
+
+The main area I would improve is the experimental design of the refinement
+stage. Error patterns from the test set were used to guide construction of the
+refinement dataset. Although the test examples themselves were not added to the
+training data, this means that the final refined-model evaluation was not fully
+independent. If repeating the project, I would use the validation set for
+error-driven refinement and reserve an untouched test set exclusively for the
+final evaluation. I would also extend evaluation to independently written
+natural-language examples to better measure generalisation beyond the
+controlled templates.
+
+The project developed my practical understanding of dataset construction,
+language-model fine-tuning, quantisation, symbolic reasoning and automated
+evaluation. It also demonstrated the importance of careful experimental design
+and of evaluating generated formal representations using multiple measures of
+correctness. While the resulting system is limited to a controlled domain, I
+believe the completed implementation and experiments successfully address the
+main aims of the project and provide a useful basis for further work.
+
+The project also taught me the importance of establishing reproducible
+datasets and evaluation procedures early, maintaining clear intermediate
+milestones, and allowing sufficient time for error analysis and experimental
+refinement.
+
+\clearpage
 
 % ============================================================
 % Bibliography

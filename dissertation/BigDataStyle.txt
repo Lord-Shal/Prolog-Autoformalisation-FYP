@@ -66,7 +66,7 @@
   Where other published and unpublished source materials have been used,
   these have been acknowledged. 
   \begin{description}
-  \item[Word Count: 12,773]
+  \item[Word Count: 13,842]
   \item[Student Name: Anonymous]
   \item[Date of Submission:]
   \end{description}

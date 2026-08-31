@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{bao2022pararule}
 Qiming Bao, Alex~Yuxuan Peng, Tim Hartill, Neset Tan, Zhenyun Deng, Michael
@@ -47,11 +47,43 @@ Liangming Pan, Alon Albalak, Xinyi Wang, and William~Yang Wang.
 \newblock In {\em Findings of the Association for Computational Linguistics:
   EMNLP 2023}, pages 3806--3824, 2023.
 
+\bibitem{qwen25}
+{Qwen Team}.
+\newblock Qwen2.5 technical report.
+\newblock {\em arXiv preprint arXiv:2412.15115}, 2024.
+
+\bibitem{shi2022execution}
+Freda Shi, Daniel Fried, Marjan Ghazvininejad, Luke Zettlemoyer, and Sida~I.
+  Wang.
+\newblock Natural language to code translation with execution.
+\newblock In {\em Proceedings of the 2022 Conference on Empirical Methods in
+  Natural Language Processing}, pages 3533--3546, 2022.
+
+\bibitem{tafjord2021proofwriter}
+Oyvind Tafjord, Bhavana Dalvi, and Peter Clark.
+\newblock Proofwriter: Generating implications, proofs, and abductive
+  statements over natural language.
+\newblock In {\em Findings of the Association for Computational Linguistics:
+  ACL-IJCNLP 2021}, pages 3621--3634, 2021.
+
+\bibitem{wielemaker2012swiprolog}
+Jan Wielemaker, Tom Schrijvers, Markus Triska, and Torbjorn Lager.
+\newblock Swi-prolog.
+\newblock {\em Theory and Practice of Logic Programming}, 12(1--2):67--96,
+  2012.
+
 \bibitem{wu2022autoformalization}
 Yuhuai Wu, Albert~Qiaochu Jiang, Wenda Li, Markus~N. Rabe, Charles Staats,
   Mateja Jamnik, and Christian Szegedy.
 \newblock Autoformalization with large language models.
 \newblock In {\em Advances in Neural Information Processing Systems},
   volume~35, pages 32353--32368, 2022.
+
+\bibitem{yang2025neurosymbolic}
+Sen Yang, Xin Li, Leyang Cui, Lidong Bing, and Wai Lam.
+\newblock Neuro-symbolic integration brings causal and reliable reasoning
+  proofs.
+\newblock In {\em Findings of the Association for Computational Linguistics:
+  NAACL 2025}, pages 5747--5759, 2025.
 
 \end{thebibliography}
