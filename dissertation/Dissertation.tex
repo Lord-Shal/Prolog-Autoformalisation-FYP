@@ -172,20 +172,13 @@ reference string while still retaining useful executable behaviour.
 
 The main contribution of this project is an end-to-end investigation of
 small-model autoformalization to Prolog. It includes the construction and
-validation of an NL--Prolog dataset, the establishment of an untuned baseline,
+validation of an NL to Prolog dataset, the establishment of an untuned baseline,
 parameter-efficient fine-tuning of a 1.5-billion-parameter language model,
 execution-based evaluation using SWI-Prolog, systematic analysis of translation
 errors and targeted refinement based on the observed failures. The experiments
 show that task-specific fine-tuning can substantially improve a small language
 model's ability to generate valid executable Prolog, while also identifying
 translation structures for which exact generation remains more difficult.
-
-The project also provides experience relevant to future work in artificial
-intelligence and software development. It involves practical work in language
-model fine-tuning, dataset construction, automated evaluation and symbolic
-reasoning, together with the design of a reproducible experimental pipeline.
-These skills are applicable to future work involving machine learning,
-generative AI and the development and evaluation of reliable AI systems.
 
 The remainder of this dissertation develops this investigation in detail:
 
@@ -195,7 +188,7 @@ The remainder of this dissertation develops this investigation in detail:
     parameter-efficient fine-tuning.
 
     \item Chapter 3 describes the construction, validation and splitting of
-    the NL--Prolog dataset.
+    the NL to Prolog dataset.
 
     \item Chapter 4 presents the model, training procedure, system design and
     evaluation methodology.
@@ -247,13 +240,13 @@ encountered during training. The authors described these models as ``soft
 theorem provers'', since the reasoning process was learned from examples rather
 than performed through an explicit symbolic inference system.
 
-RuleTaker demonstrates that transformer models can learn patterns corresponding
-to deductive reasoning. However, this distinction between learning the
-behaviour of a reasoning process and executing a formal reasoning procedure
-remains important. A neural model may produce the correct answer without
-providing a representation that can independently be checked by a deterministic
-solver. This motivates approaches in which language understanding and formal
-inference are separated.
+The RuleTaker results show that transformer models can learn patterns
+corresponding to deductive reasoning. However, learning the behaviour of
+a reasoning process is not equivalent to executing a formal reasoning
+procedure. A neural model may produce the correct answer without
+providing a representation that can independently be checked by a
+deterministic solver. This motivates approaches in which language
+understanding and formal inference are separated.
 
 A related line of research has therefore investigated neuro-symbolic reasoning,
 combining the flexibility of neural language models with the explicit inference
@@ -271,9 +264,8 @@ Wu et al.~\cite{wu2022autoformalization}, who used large language models to
 translate mathematical statements into Isabelle/HOL. Their experiments showed that language models
 could correctly formalize a portion of mathematical competition problems and
 that the generated formalizations could subsequently support automated theorem
-proving. This demonstrated that language models could serve as an interface
-between informal human language and representations suitable for formal
-verification.
+proving. These results showed that language models could serve as an interface
+between informal human language and representations suitable for formal verification.
 
 The importance of autoformalization is that formal output can be subjected to
 checks that are unavailable for ordinary natural-language responses. This means
@@ -299,8 +291,8 @@ as a semantic parser that translates natural-language premises and conclusions
 into first-order logic. Deductive reasoning is then delegated to an external
 theorem prover. Their experiments on ProofWriter~\cite{tafjord2021proofwriter}
 and FOLIO found that this separation could outperform direct chain-of-thought
-reasoning. This approach also produced strong results when using an open-source
-model smaller than the largest proprietary models evaluated in the study.
+reasoning. LINC also produced strong results when using an open-source model
+smaller than the largest proprietary models evaluated in the study.
 
 These systems support the central principle behind the present project: a
 language model does not necessarily need to perform every part of logical
@@ -391,7 +383,7 @@ ordinary question answering over these datasets. The desired model output is
 not simply a true or false label. Instead, the model must generate the
 underlying Prolog representation itself.
 
-For this reason, a dedicated NL--Prolog dataset was constructed rather than
+For this reason, a dedicated NL to Prolog dataset was constructed rather than
 directly training on PARARULE-Plus. This provides precise control over the
 expected Prolog syntax, predicate structures and difficulty levels and allows
 every target program to be automatically checked with the same Prolog
@@ -428,22 +420,20 @@ memory requirements while maintaining competitive fine-tuning performance.
 
 This makes QLoRA particularly appropriate to the aims of this project because
 it makes fine-tuning feasible on limited hardware. The investigation can
-therefore focus on whether a small model can learn NL--Prolog translation
+therefore focus on whether a small model can learn NL to Prolog translation
 without requiring the computational resources associated with full fine-tuning
 or substantially larger language models.
 
 
 \subsection{Position of This Project}
 
-Previous research provides strong evidence for combining neural language
-understanding with symbolic reasoning. Autoformalization work has shown
-that language models can translate informal statements into formal languages,
-while Logic-LM and LINC demonstrate the value of delegating inference to
-deterministic symbolic solvers. RuleTaker and PARARULE-Plus further show
-how controlled natural-language datasets can be used to investigate logical
-reasoning systematically. Recent Prolog-based work also demonstrates
-growing interest in using executable logic programs as an interface between
-language models and formal reasoning.
+Previous research provides a lot of foundation for this project. Autoformalization
+research establishes that language models can translate informal statements
+into formal languages, while Logic-LM and LINC separate language interpretation
+from symbolic inference. RuleTaker and PARARULE-Plus provide examples of
+controlled datasets for studying logical reasoning, and recent Prolog-based work
+explores executable logic programs as an interface between language models
+and formal reasoning.
 
 Despite these similarities, the present project differs from this previous work
 in its primary experimental focus. RuleTaker and PARARULE-Plus primarily
@@ -455,11 +445,11 @@ task. The Prolog-based work of Mellgren et al. similarly demonstrates the value
 of executable symbolic programs, but uses a larger Qwen2.5-3B-Instruct model
 and investigates Prolog as an external reasoning tool. In contrast, the present
 project examines direct task-specific adaptation of Qwen2.5-1.5B-Instruct for
-NL--Prolog translation.
+NL to Prolog translation.
 
 The central question is therefore not whether a large general-purpose language
 model can be prompted to produce symbolic representations, but whether a
-1.5-billion-parameter model can be explicitly trained to perform NL--Prolog
+1.5-billion-parameter model can be explicitly trained to perform NL to Prolog
 translation reliably within a controlled domain. The generated output is evaluated
 at several levels, separating exact textual agreement from syntactic validity,
 executability and reasoning correctness. This allows the experiments to distinguish
@@ -547,12 +537,12 @@ corresponding Prolog representation. Reasoning examples additionally
 included a query and an expected result.
 
 \begin{algorithm}[ht]
-\caption{NL--Prolog Dataset Generation}
+\caption{NL to Prolog Dataset Generation}
 \label{alg:dataset_generation}
 \begin{algorithmic}[1]
 \Require Level specifications, NL templates, Prolog templates,
          entity names and predicates
-\Ensure Dataset of NL--Prolog examples
+\Ensure Dataset of NL to Prolog examples
 
 \State Initialise empty dataset
 
@@ -736,7 +726,7 @@ discussed further in Chapters 5 and 6.
 
 \subsection{Final Dataset}
 
-The resulting dataset contains 2,000 validated NL--Prolog pairs covering facts,
+The resulting dataset contains 2,000 validated NL to Prolog pairs covering facts,
 simple rules, multi-condition rules and executable reasoning problems. Its
 construction combines ideas from controlled synthetic reasoning datasets with
 direct symbolic program generation. Unlike datasets designed primarily for
@@ -879,7 +869,7 @@ evaluation procedure.
 
 \subsection{QLoRA Implementation}
 
-QLoRA was used to adapt Qwen2.5-1.5B-Instruct to the NL--Prolog translation
+QLoRA was used to adapt Qwen2.5-1.5B-Instruct to the NL to Prolog translation
 task. The implementation combined 4-bit NF4 quantisation of the base model
 with trainable LoRA adapter layers.
 
@@ -1082,7 +1072,7 @@ model-development process.
 The experiments were conducted in three stages. First, the original
 Qwen2.5-1.5B-Instruct model was evaluated without task-specific fine-tuning to
 establish a baseline. Second, the model was fine-tuned using QLoRA on the
-original NL--Prolog training set and evaluated under the same conditions. The
+original NL to Prolog training set and evaluated under the same conditions. The
 errors produced by this model were then analysed by difficulty level, category
 and template group. Finally, a targeted refinement dataset was created from the
 observed weaknesses, and a second fine-tuned model was trained and evaluated.
@@ -1090,7 +1080,7 @@ observed weaknesses, and a second fine-tuned model was trained and evaluated.
 \subsection{Baseline Evaluation}
 
 The first experiment measured how effectively the original
-Qwen2.5-1.5B-Instruct model could perform NL--Prolog translation without
+Qwen2.5-1.5B-Instruct model could perform NL to Prolog translation without
 task-specific training. The model received the same instruction used throughout
 the experiments and was required to return only Prolog code.
 
@@ -1138,7 +1128,7 @@ successfully while encoding incorrect facts or relationships.
 
 The baseline therefore established a clear lower reference point.
 Qwen2.5-1.5B-Instruct possessed some general ability to generate structured
-code-like text, but this did not translate into reliable NL--Prolog
+code-like text, but this did not translate into reliable NL to Prolog
 formalization.
 
 This result is consistent with the motivation behind neuro-symbolic systems
@@ -1193,7 +1183,7 @@ These results support the use of parameter-efficient fine-tuning for a narrow
 formalization task. QLoRA allows quantised pretrained language models to be
 adapted using a comparatively small number of trainable parameters. In this
 project, the approach allowed a 1.5-billion-parameter model to acquire
-specialised NL--Prolog generation behaviour using consumer hardware.
+specialised NL to Prolog generation behaviour using consumer hardware.
 
 \begin{figure}[htbp]
     \centering
@@ -1579,7 +1569,7 @@ The experiments in this project examine the preceding problem more directly:
 whether a small language model can be trained to produce that intermediate
 symbolic representation reliably. The progression from 0.50\% to 87.94\%
 exact match, together with complete syntactic validity and executability in the
-final model, shows that Qwen2.5-1.5B can acquire strong NL--Prolog translation
+final model, shows that Qwen2.5-1.5B can acquire strong NL to Prolog translation
 behaviour from a relatively small, controlled dataset. At the same time, the
 remaining Level 3 failures show that syntactically correct generation does not
 guarantee precise semantic formalization. The implications and limitations of
@@ -1674,14 +1664,6 @@ reversing arguments in \texttt{parent/2} produces a syntactically valid program
 representing a different relationship. Therefore, execution should complement
 rather than replace semantic evaluation.
 
-At the same time, successful execution cannot by itself establish that a
-generated program faithfully represents the natural-language input. A program
-may be syntactically valid and execute successfully while using an incorrect
-predicate or reversing the arguments of a relation. Symbolic execution can
-therefore verify properties of the representation it receives, but it cannot
-by itself verify that the representation is a semantically faithful
-formalization of the original statement.
-
 \subsection{Reasoning Correctness}
 
 Reasoning accuracy showed one of the largest improvements between the baseline
@@ -1747,10 +1729,10 @@ rather than judging only the final reasoning result.
 \subsection{Effect of Targeted Refinement}
 
 The refinement experiment increased exact-match accuracy from 81.41\% to
-87.94\%, reduced non-exact outputs from 37 to 24 and increased reasoning
-correctness to 100\%. The improvement indicates that error analysis can be used
-to guide additional training more efficiently than simply generating more
-examples without considering model behaviour.
+87.94\%, reduced non-exact outputs from 37 to 24 while reasoning
+correctness remained at 100\%. The improvement indicates that error analysis
+can be used to guide additional training more efficiently than simply
+generating more examples without considering model behaviour.
 
 This is conceptually related to approaches that use symbolic-solver feedback
 to improve failed formalizations. The mechanism used here differs: instead of
@@ -1843,9 +1825,10 @@ templates.
 The experiments used Qwen2.5-1.5B-Instruct as the base model. Before
 fine-tuning, its performance on the 199-example test set was poor. Exact-match
 accuracy was only 0.50\%, while 39.70\% of outputs were syntactically valid and
-executable. Reasoning correctness was 14.63\%. These results demonstrated that
-general instruction-following ability alone was insufficient for reliable
-natural-language-to-Prolog translation.
+executable. Reasoning correctness was 14.63\%. The poor baseline performance
+indicates that general instruction-following ability alone was insufficient for
+reliable natural-language-to-Prolog translation.
+
 
 QLoRA fine-tuning produced a substantial improvement. The first fine-tuned
 model achieved 81.41\% exact-match accuracy, while every generated program was
@@ -1866,25 +1849,23 @@ complex semantic relationships expressed within it.
 
 The results therefore provide a positive answer to the central research
 question within the scope of the experiment. A 1.5-billion-parameter language
-model can be fine-tuned to perform NL--Prolog autoformalization with high
+model can be fine-tuned to perform NL to Prolog autoformalization with high
 reliability on a controlled domain, and parameter-efficient training makes
-this possible using consumer hardware. The project also demonstrates the
-usefulness of Prolog execution as an evaluation mechanism. Exact match alone
-does not fully describe model performance: an output can differ from the
-reference while remaining executable, while an executable program may still
-encode an incorrect semantic relationship. Combining exact match with syntax,
-execution and reasoning evaluation therefore gives a more informative picture
-of autoformalization quality.
+this possible using consumer hardware. Prolog execution also proved useful
+as an evaluation mechanism. Exact match alone does not fully describe model
+performance: an output can differ from the reference while remaining
+executable, while an executable program may still encode an incorrect semantic
+relationship. Combining exact match with syntax, execution and reasoning
+evaluation therefore gives a more informative picture of autoformalization
+quality.
 
-There are several limitations to these conclusions. The dataset was
-synthetically generated from controlled templates and consequently does not
-represent the full linguistic variation of naturally written reasoning
-problems. The test set was also relatively small. In addition, the refinement
-examples were designed after inspecting weaknesses observed on the test set,
-meaning that the final 87.94\% result should not be interpreted as a fully
-independent estimate of generalisation. The refinement experiment demonstrates
-improvement on identified weaknesses, but a completely untouched final test
-set would be required for stronger evaluation.
+There are several limitations to these conclusions. The dataset was synthetically
+generated from controlled templates and consequently does not represent the
+full linguistic variation of naturally written reasoning problems. The test set was
+also relatively small. As discussed in the previous section, the targeted
+refinement procedure additionally limits the independence of the final
+refined-model evaluation.
+
 
 Future work should therefore evaluate the model on natural or independently
 written language, including paraphrases and structures not represented by the
@@ -1902,13 +1883,14 @@ could, for example, detect invalid or unsuccessful generated programs and
 request a corrected formalization automatically. This would extend the current
 pipeline from execution-based evaluation towards execution-guided generation.
 
-Overall, the project demonstrates that relatively small language models can
-learn a useful interface between natural language and symbolic logic. Although
-the resulting model is not a general-purpose autoformalizer, the substantial
-improvement from the untuned baseline and the reliability of executable output
-show that combining task-specific language-model training with symbolic
-validation is a practical approach to producing more checkable forms of
+Overall, the findings show that relatively small language models can learn a
+useful interface between natural language and symbolic logic. Although the
+resulting model is not a general-purpose autoformalizer, the substantial
+improvement over the untuned baseline and the reliability of the executable
+output support task-specific language-model training combined with symbolic
+validation as a practical approach to producing more checkable forms of
 machine reasoning.
+
 
 % ============================================================
 \clearpage
@@ -1972,7 +1954,7 @@ swipl --version
 
 \subsection{Dataset Generation and Validation}
 
-The original NL--Prolog dataset can be generated from the project root using:
+The original NL to Prolog dataset can be generated from the project root using:
 
 \begin{lstlisting}
 python src/dataset/generate_dataset.py
@@ -2189,7 +2171,7 @@ Overall, I consider the project successful in achieving its primary objective
 of investigating whether a small language model could be trained to translate
 natural-language reasoning statements into executable Prolog. The completed
 work includes the construction and automated validation of a 2,000-example
-NL--Prolog dataset, implementation of a reproducible training and evaluation
+NL to Prolog dataset, implementation of a reproducible training and evaluation
 pipeline, QLoRA fine-tuning of Qwen2.5-1.5B-Instruct, error analysis and a
 targeted refinement experiment.
 
@@ -2211,17 +2193,25 @@ natural-language examples to better measure generalisation beyond the
 controlled templates.
 
 The project developed my practical understanding of dataset construction,
-language-model fine-tuning, quantisation, symbolic reasoning and automated
-evaluation. It also demonstrated the importance of careful experimental design
-and of evaluating generated formal representations using multiple measures of
-correctness. While the resulting system is limited to a controlled domain, I
-believe the completed implementation and experiments successfully address the
-main aims of the project and provide a useful basis for further work.
+language-model fine-tuning, quantisation, symbolic reasoning and
+automated evaluation. In particular, constructing the dataset highlighted the
+importance of validating generated examples automatically and keeping
+related templates within the same data split to reduce leakage. Developing
+the evaluation pipeline also showed that exact match alone was insufficient
+for this task, since generated Prolog could differ textually from the reference
+while remaining syntactically valid, executable and functionally correct.
 
-The project also taught me the importance of establishing reproducible
-datasets and evaluation procedures early, maintaining clear intermediate
-milestones, and allowing sufficient time for error analysis and experimental
-refinement.
+The development process also showed the value of analysing individual
+failures rather than relying only on aggregate metrics. After the initial
+fine-tuned model reached 81.41\% exact-match accuracy, examining its
+remaining errors revealed recurring problems with particular relational
+and multi-condition structures. This analysis provided a clear basis for
+the targeted refinement experiment, although using the test-set failures
+for this purpose also exposed the experimental-design limitation
+discussed above. If developing the project further, I would establish the
+independent final evaluation set before beginning iterative refinement
+and use validation results to guide subsequent changes.
+
 
 \clearpage
 

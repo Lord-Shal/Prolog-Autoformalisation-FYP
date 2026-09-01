@@ -68,7 +68,7 @@
   \begin{description}
   \item[Word Count: 13,842]
   \item[Student Name: Anonymous]
-  \item[Date of Submission:]
+  \item[Date of Submission: 01/09/26]
   \end{description}
 }
 
